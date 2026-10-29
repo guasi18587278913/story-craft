@@ -19,12 +19,15 @@ import urllib.error
 import urllib.request
 import uuid
 
+from _review_safety import output_path, task_directory
+
 ROOT = Path(__file__).resolve().parents[1]
 ENDPOINT = 'https://api.deepseek.com/chat/completions'
 MODEL = 'deepseek-flash'
 MAX_CALLS = 20
 DEFAULT_LIMIT = 6
-DEFAULT_AUDIENCE = '没接触过这个行业的普通观众，没看过原材料'
+DEFAULT_AUDIENCE = '未提供（任务受众未确认）'
+DEFAULT_MEDIUM = '未提供（形式与时长未确认）'
 DEFAULT_KEY_FILE = Path.home()/'.config/story-craft/deepseek.env'
 MAX_TOKENS = 8192
 
@@ -123,11 +126,15 @@ def build_payload(draft,audience,medium,key):
 
 def budget_path(argument=None,task_dir=None):
     configured=os.environ.get('STORY_CRAFT_READER_BUDGET')
-    if configured and argument and Path(configured).expanduser().resolve()!=Path(argument).expanduser().resolve():
-        raise Failure('budget_mismatch','参数与环境变量指定了不同账本，请统一配置。')
-    value=argument or configured
-    if value:return Path(value).expanduser().resolve()
-    if task_dir:return task_dir/'first-reader'/'budget.json'
+    try:
+        if configured and argument and Path(configured).expanduser().resolve()!=Path(argument).expanduser().resolve():
+            raise Failure('budget_mismatch','参数与环境变量指定了不同账本，请统一配置。')
+        value=argument or configured
+        if value or task_dir:
+            path=Path(value).expanduser() if value else task_dir/'first-reader'/'budget.json'
+            return output_path(path,ROOT)
+    except (OSError,ValueError,RuntimeError):
+        raise Failure('budget_unsafe','账本不能写入仓库、Git 管理目录、软链接或无效输出路径。')
     raise Failure('budget_missing','需要任务目录以确定默认账本。')
 
 def read_budget(path,create=False,limit=None):
@@ -283,7 +290,10 @@ def run_one(item,key,source,budget,timeout):
     request_text=json.dumps(payload,ensure_ascii=False)
     receipt={'provider':'DeepSeek','endpoint':ENDPOINT,'requested_model':MODEL,'status':'requesting',
              'started_at':now(),'independent_return':False,'attempts':1,'budget_attempt_id':attempt_id,
-             'request_sha256':sha(request_text),'reviewed_draft_sha256':sha(draft),'key_source':source}
+             'request_sha256':sha(request_text),'reviewed_draft_sha256':sha(draft),'key_source':source,
+             'task_context':item.get('task_context'),
+             'execution':{'call_stage':'not_started','response_bytes_received':0,'nonempty_feedback_received':False,
+                          'author_adoption':'unknown','post_revision_check':'unknown','draft_quality':'not_assessed'}}
     target=out/'receipt.json'
     trace={'raw':bytearray(),'http_status':None};usage=None;started=time.monotonic()
     error=None;feedback=None
@@ -296,7 +306,9 @@ def run_one(item,key,source,budget,timeout):
         with ledger(budget) as data:
             if data.get('stop_reason'):raise Failure('budget_stopped','该账本已停用，未发送此稿。')
             next(x for x in data['attempts'] if x['id']==attempt_id)['status']='requesting'
+        receipt['execution']['call_stage']='attempted'
         post_once(payload,key,timeout,trace)
+        receipt['execution']['call_stage']='timed_out' if trace.get('timed_out') else 'returned'
         response_text,redacted=clean_response(bytes(trace['raw']),key)
         receipt['response_redacted']=redacted
         (out/'response.txt').write_text(response_text,encoding='utf-8')
@@ -320,6 +332,7 @@ def run_one(item,key,source,budget,timeout):
         if not isinstance(choice,dict) or not isinstance(choice.get('message'),dict):raise Failure('invalid_response','接口message格式异常。')
         content=choice['message'].get('content')
         if not isinstance(content,str) or not content.strip():raise Failure('empty_content','接口正文为空（不把思考内容当反馈）。')
+        receipt['execution']['nonempty_feedback_received']=True
         if choice.get('finish_reason') is None:
             raise Failure('finish_reason_missing','接口未返回结束原因。')
         if choice.get('finish_reason')!='stop':
@@ -342,7 +355,11 @@ def run_one(item,key,source,budget,timeout):
             receipt['response_redacted']=True
             write_json(out/'response.txt',saved)
         if error:
-            receipt.update(status='failed',independent_return=False,error_code=error.code,error=error.message)
+            message=(error.message if receipt['execution']['call_stage']=='not_started' else
+                     '已尝试独立审查，但未取得完整有效返回：'+error.reason)
+            receipt.update(status='failed',independent_return=False,error_code=error.code,error=message)
+        receipt['execution']['response_bytes_received']=len(trace['raw'])
+        receipt['review_state']='reviews_received' if receipt['independent_return'] else 'no_reviews_received'
         receipt.update(http_status=trace['http_status'],request_id=scrub(trace.get('request_id') or '',key),usage=usage,
                        duration_seconds=round(time.monotonic()-started,3),finished_at=now())
         write_json(out/'usage.json',{'usage':usage,'reported':isinstance(usage,dict),'note':'只记接口返回的token数；没有返回时不假报0，也不推定免费。'})
@@ -352,32 +369,41 @@ def run_one(item,key,source,budget,timeout):
                    usage,reason=error.reason if error else None,halt=error.halt if error else False)
     return {'independent_return':receipt['independent_return'],'status':receipt['status'],'http_status':receipt['http_status'],
             'usage':usage,'receipt':str(target),'feedback':str(out/'feedback.md') if receipt['independent_return'] else None,
-            'message':'已取得 DeepSeek 独立审查返回。' if receipt['independent_return'] else receipt.get('error')}
+            'task_context':receipt['task_context'],'execution':receipt['execution'],'review_state':receipt['review_state'],
+            'message':'已取得 DeepSeek 独立审查返回（不代表作者采纳、改后复核或稿件质量通过）。' if receipt['independent_return'] else receipt.get('error')}
 
-def run(task_dir,draft_paths,audience=DEFAULT_AUDIENCE,medium='约两分钟口播',key_file=None,budget_file=None,
+def run(task_dir,draft_paths,audience=None,medium=None,key_file=None,budget_file=None,
         allow_external=False,timeout=180,limit=None):
-    from audit_draft import persistent
     if not allow_external:raise Failure('external_not_authorized','请先按首读执行说明核实外发范围。')
     if type(timeout) is not int or not 30<=timeout<=600:raise Failure('invalid_timeout','超时应为 30–600 秒。')
     if limit is not None and (type(limit) is not int or not 1<=limit<=MAX_CALLS):
         raise Failure('invalid_limit','新建账本上限应为 1–20。')
-    if not audience.strip() or not medium.strip() or not draft_paths:
+    context={'audience':{'value':DEFAULT_AUDIENCE if audience is None else audience,
+                         'source':'default_assumption' if audience is None else 'explicit'},
+             'medium':{'value':DEFAULT_MEDIUM if medium is None else medium,
+                       'source':'default_assumption' if medium is None else 'explicit'}}
+    audience,medium=context['audience']['value'],context['medium']['value']
+    if not isinstance(audience,str) or not isinstance(medium,str) or not audience.strip() or not medium.strip() or not draft_paths:
         raise Failure('invalid_arguments','需要稿件、读者画像和呈现方式。')
     try:
         if not Path(task_dir).expanduser().is_absolute():raise ValueError('任务目录应为绝对路径。')
-        task=persistent(Path(task_dir))
+        task=task_directory(Path(task_dir),ROOT)
         if not task.is_dir():raise ValueError('任务目录不存在。')
-        review=persistent(task/'first-reader')
+        review=output_path(task/'first-reader',ROOT,base=task,directory=True)
         if review!=task/'first-reader' or (review.exists() and not review.is_dir()):
             raise ValueError('首读输出目录应是任务中的实际目录。')
         if not os.access(task,os.W_OK):raise ValueError('任务目录不可写。')
         key,source=read_key(key_file)
-        prepared=[]
+        prepared=[];draft_files=[]
         for path in draft_paths:
             path=Path(path).expanduser();path=path if path.is_absolute() else task/path
             draft=path.read_text(encoding='utf-8')
-            prepared.append({'name':path.stem,'draft':draft,'payload':build_payload(draft,audience,medium,key)})
+            draft_files.append(path)
+            prepared.append({'name':path.stem,'draft':draft,'payload':build_payload(draft,audience,medium,key),
+                             'task_context':context})
         budget=budget_path(budget_file,task)
+        if any(budget==path.resolve() or (budget.exists() and budget.samefile(path)) for path in draft_files):
+            raise Failure('budget_input_conflict','账本不能与任何输入稿件指向同一文件。')
         create=not budget_file and not os.environ.get('STORY_CRAFT_READER_BUDGET')
         if not lock_parent(budget).is_dir():raise ValueError('账本的父目录不存在。')
         # No files or directories have been created before both preflight passes.
@@ -405,7 +431,14 @@ def run(task_dir,draft_paths,audience=DEFAULT_AUDIENCE,medium='约两分钟口�
     finally:
         cancel_reserved(budget,{x['id'] for x in prepared})
     completed=len(results)==len(prepared) and all(x['independent_return'] for x in results)
-    return {'independent_return':completed,'requested':len(prepared),'sent':len(results),'results':results}
+    received=sum(x['independent_return'] for x in results)
+    # Count client request attempts, not processed drafts or provider receipts/billing.
+    attempted=sum(x['execution']['call_stage'] in ('attempted','returned','timed_out') for x in results)
+    return {'independent_return':completed,'requested':len(prepared),'processed':len(results),
+            'sent':attempted,'sent_semantics':'client_request_attempts_not_provider_receipts_or_billing','results':results,
+            'task_context':context,'review_state':'reviews_received' if completed else
+            'partial_reviews_received' if received else 'no_reviews_received',
+            'author_adoption':'unknown','post_revision_check':'unknown','draft_quality':'not_assessed'}
 
 class SafeParser(argparse.ArgumentParser):
     def error(self,message):
@@ -430,7 +463,7 @@ def main():
 """)
     p.add_argument('--task-dir',type=Path,required=True)
     p.add_argument('--draft',type=Path,action='append',required=True)
-    p.add_argument('--audience',default=DEFAULT_AUDIENCE,help='读者画像；省略时使用无行业背景的普通观众');p.add_argument('--medium',default='约两分钟口播')
+    p.add_argument('--audience',help='读者画像；省略时使用未确认的默认假设');p.add_argument('--medium',help='形式与时长；省略时使用未确认的默认假设')
     p.add_argument('--key-file',type=Path,help='已有配置文件；不打印密钥')
     p.add_argument('--budget-file',type=Path,help='已有共享账本，与环境变量不同时拒绝')
     p.add_argument('--allow-external',action='store_true',help='已按首读说明核实外发范围')
