@@ -3,7 +3,7 @@
   "source": "installed story-craft skill snapshot",
   "destination_repository": "guasi18587278913/story-craft",
   "intended_visibility": "private",
-  "source_file_count": 102,
+  "source_file_count": 103,
   "byte_identical_source_files": true,
   "excluded": [
     "external credentials and local configuration",
@@ -20,8 +20,8 @@
   "source_files": [
     {
       "path": "SKILL.md",
-      "sha256": "2c3eb04c3e0d3a94893769af5920c2f1033f73b5e5005bf89bab83aa7de2b9cb",
-      "bytes": 13121
+      "sha256": "973ae1039e4ffbbb13d464a0feb71b2dea1ec95d75dbc36ae5c94b3ccdbb6f58",
+      "bytes": 14380
     },
     {
       "path": "agents/first-reader.md",
@@ -45,8 +45,8 @@
     },
     {
       "path": "references/materials-and-angle.md",
-      "sha256": "bf19228957352cac970dec5d5a3f0b12c436fb7633748e5a7ef6208e3cdec953",
-      "bytes": 7682
+      "sha256": "f08f84b929547a3b24014f1ef92065f39e07105b1f0fa6dc5962aabcee3fed97",
+      "bytes": 8330
     },
     {
       "path": "references/research-coverage.md",
@@ -65,8 +65,8 @@
     },
     {
       "path": "references/revision/index.md",
-      "sha256": "2d82bbae27527865d29e8a5e156d974d33239b0cc061dc24434d2bca2970afb0",
-      "bytes": 9474
+      "sha256": "a8189ac7d88f3c76a99aed2a895de5c88e3008727ac6e9e8907adb56be63c062",
+      "bytes": 12094
     },
     {
       "path": "references/revision/method.md",
@@ -85,8 +85,8 @@
     },
     {
       "path": "references/script-usage.md",
-      "sha256": "594175595e28cc30b62d51cd205d5124f5b1b213db9199e4ba613d67b034e37b",
-      "bytes": 7045
+      "sha256": "a39f757c1f36b831de3a6e61247c1d47b9487c7d3c04547b3002d6bc824e14e4",
+      "bytes": 8603
     },
     {
       "path": "references/source-map.md",
@@ -505,8 +505,8 @@
     },
     {
       "path": "scripts/run_review_panel.py",
-      "sha256": "23e3289de0238d03cb3df2c871711c8529e8415a7c7472a26779f058498d82aa",
-      "bytes": 15389
+      "sha256": "d890be36d9aa002f9d6ac828c06ada0594e2ea4d595dc49fb91d0297220df582",
+      "bytes": 20494
     },
     {
       "path": "templates/material-checklist.md",
@@ -520,45 +520,45 @@
     },
     {
       "path": "templates/story-workbench.md",
-      "sha256": "d8c6379913cf5c5f2e84c9a45553fe7d17328f1c161731905e8616b00fc3b654",
-      "bytes": 5459
+      "sha256": "cc8536827ea3edfef51f429e0ae44c6b43479a19c3a3e363d110e7850aa39baa",
+      "bytes": 5953
     },
     {
       "path": "templates/voiceover-delivery.md",
-      "sha256": "a8a55af863676087d257f8326e0142625deca33b96f7521d42b51ed3fedc631f",
-      "bytes": 1348
+      "sha256": "f9e3f459132c035dde8fa43ba50c38de7218156b102f59bd6512d02df77e5ec0",
+      "bytes": 2288
+    },
+    {
+      "path": "tests/test_review_panel.py",
+      "sha256": "171c5e0290f6267e5a0a0ebdc6522021ba2caaefb3154bf33296e9fb618f0ea6",
+      "bytes": 8786
     }
   ],
   "validation": {
+    "validated_at": "2026-10-29T18:07:38+08:00",
     "skill_integrity": {
       "exit_code": 0,
       "method_entries": 54,
-      "local_links": 223,
+      "local_links": 234,
       "story_cards": 18,
       "writing_cards": 43,
       "errors": 0
     },
-    "skill_frontmatter": {
-      "exit_code": 0
-    },
     "source_byte_comparison": {
-      "matched": 102,
+      "matched": 103,
       "mismatched": 0
     },
     "sensitive_file_and_literal_scan": {
       "findings": 0,
-      "scope": "tracked paths and common credential/private-path literal patterns; not a guarantee against all secrets"
+      "scope": "source-file whitelist and common credential/private-path literal patterns; not a guarantee against all secrets"
     },
-    "new_packaging_whitespace": {
+    "changed_files_whitespace": {
       "exit_code": 0
     },
-    "full_import_whitespace": {
-      "exit_code": 2,
-      "preexisting_format_warnings": 6,
-      "action": "Preserved byte-identical source quotation layout and end-of-file blank lines; no content normalization."
-    },
+    "behavior_validation": "Reused byte-identical installed-skill tests and independent review, detailed in the final sync entry.",
     "model_calls": 0,
-    "live_wiki_comparison": "not_run"
+    "live_wiki_comparison": "not_run",
+    "full_external_review_chain": "not_tested"
   },
   "syncs": [
     {
@@ -606,6 +606,76 @@
         "findings": 0
       },
       "model_calls": 0
+    },
+    {
+      "synced_at": "2026-10-29T18:07:38+08:00",
+      "note": "同步事实边界补强、实际字数估时及改后复核，并落实本轮五项优化：审稿范围与理解判定、按修改类型选组、版本绑定与失败记录、讲法与局部修改直接交付。",
+      "changed_skill_files": 8,
+      "source_byte_comparison": {
+        "matched": 103,
+        "mismatched": 0
+      },
+      "prior_validation_reused": {
+        "reason": "全部技能文件SHA-256与本轮已验证清单一致，未重复运行同级功能测试。",
+        "offline_regression": {
+          "passed": 14,
+          "failed": 0,
+          "exit_code": 0
+        },
+        "targeted_prompt_recheck": {
+          "passed": 3,
+          "failed": 0,
+          "exit_code": 0,
+          "note": "前述14项中的3项定向复验，不累计为17项独立测试。"
+        },
+        "independent_implementation_review": {
+          "unresolved_blockers": 0,
+          "unresolved_nonblockers": 0
+        },
+        "independent_synthetic_examples": 4
+      },
+      "external_model_calls_for_sync": 0,
+      "full_external_review_chain": "not_tested",
+      "repository_integrity": {
+        "exit_code": 0,
+        "method_entries": 54,
+        "local_links": 234,
+        "story_cards": 18,
+        "writing_cards": 43,
+        "errors": 0
+      }
     }
-  ]
+  ],
+  "last_synced_at": "2026-10-29T18:07:38+08:00",
+  "initial_import_validation": {
+    "skill_integrity": {
+      "exit_code": 0,
+      "method_entries": 54,
+      "local_links": 223,
+      "story_cards": 18,
+      "writing_cards": 43,
+      "errors": 0
+    },
+    "skill_frontmatter": {
+      "exit_code": 0
+    },
+    "source_byte_comparison": {
+      "matched": 102,
+      "mismatched": 0
+    },
+    "sensitive_file_and_literal_scan": {
+      "findings": 0,
+      "scope": "tracked paths and common credential/private-path literal patterns; not a guarantee against all secrets"
+    },
+    "new_packaging_whitespace": {
+      "exit_code": 0
+    },
+    "full_import_whitespace": {
+      "exit_code": 2,
+      "preexisting_format_warnings": 6,
+      "action": "Preserved byte-identical source quotation layout and end-of-file blank lines; no content normalization."
+    },
+    "model_calls": 0,
+    "live_wiki_comparison": "not_run"
+  }
 }

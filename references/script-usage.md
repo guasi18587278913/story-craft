@@ -54,9 +54,16 @@ python3 scripts/check_quotes_numbers.py --source "$TASK_DIR/source.md" --draft "
 
 ```bash
 python3 scripts/run_review_panel.py --task-dir "$TASK_DIR" --draft draft-23-初稿.md --engine codex --audience "普通人，不是工程师" --medium "抖音口播，AI 配音，两分钟以内" --focus "这篇只讲的那一点"
+python3 scripts/run_review_panel.py --task-dir "$TASK_DIR" --draft draft-23.md --engine claude --scope local --groups 5 --changes changes.md
 ```
 
-在 Claude Code 里写的稿用 `--engine codex`，在 Codex 里写的用 `--engine claude`。脚本按[改稿](revision/index.md#2-八个审稿员分组审)的分组，从改稿手册截出每位审稿员那几条标准的全文，第 5 位另带风险反例和 `source.md`；第 10 位是用意审稿员，只拿稿子、观众和形式，逐句、再逐段问想让观众明白什么、没读过原文的人能不能自己说出来。默认这九位同时跑，意见存在 `review/<稿名>/`，提示存在 `review/<稿名>/prompts/`，汇总在 `summary.json`。`--groups 1,4,5` 只跑其中几位；`--groups 9` 是标题封面那位，只在要起标题时用；`--groups 10` 只跑用意审稿员。`--prompts-only` 只生成提示、不调用模型，给另一家用不了时改用本工具干净会话去审。Codex 审稿员的思考强度默认 xhigh，用 `--effort` 改；Claude 审稿员用它自己的默认。失败或超时的那一位记在汇总里，不自动重试，退出码非零。
+在 Claude Code 里写的稿用 `--engine codex`，在 Codex 里写的用 `--engine claude`。按[修改范围](revision/index.md#先按修改范围选审稿员)选组：整篇 `--scope full` 默认 1–8 加 10，局部 `--scope local` 必须显式给 `--groups` 和非空 `--changes` 文件，缺参数会在调用前拒绝。`--groups 5` 只核事实，`--groups 4,10` 只核相关表达和理解；标题封面用 9。纯错字、标点或排版修改不运行本脚本。几类改动取相关组并集，不自动补齐九位。
+
+`changes.md` 只列当前稿的句段位置、逐字短引、改动类型和受影响范围，不给预期答案、不夹带稿外原材料；路径相对任务目录。例如：“第 2 段‘只有 1 家付了 300 元’，核试用与付费数量及金额；其他段不改。”脚本把范围发给每位已选审稿员，稿件仍提供理解所需的前后文。第 5 位另拿 `source.md` 和风险反例，第 10 位不拿看点或原材料。用意判断按[改稿说明](revision/index.md#2-八个审稿员分组审)，允许可理解的潜台词和有兑现的悬念，只对声称成功的稿件检查对应过程。
+
+每次执行（包括 `--prompts-only`）创建独立的 `review/<草稿文件名去扩展名>/run-…/`，不覆盖以前的轮次。以输出 JSON 的 `review_dir` 为准：`inputs/` 保存送审正文、用到的原材料及修改范围，`prompts/` 保存提示，`summary.json` 记录 `run_id`、`draft_sha256`、其他输入与提示指纹、实际分组和各组状态。指纹对应保存和送审的 UTF-8 文本。已有输出会被拒绝；不能因旧目录有意见就记成本轮完成。
+
+汇总在调用前写入，此后随各组返回更新。缺少模型命令、启动失败、超时、非零退出或空返回都记失败，退出码非零；不自动重试。`prompts_only` 状态只证明生成了提示；`completed` 只证明本轮所选组取得了非空返回。另一家模型用不了时，加 `--prompts-only` 生成本轮提示，交给本工具另开的干净会话去审，交稿时说明。Codex 思考强度默认 xhigh，可用 `--effort` 改；Claude 用自己的默认。
 
 审稿提示会按是否拿到原材料区分判断依据：只有第 5 位核对来源并引用原句，其余只据稿面诊断。意见按“必须修／待核原文／可选增强”输出，由写稿方核实后取舍；脚本的成功状态只表示取得返回，不证明分类、事实判断或建议正确。
 
@@ -67,3 +74,5 @@ python3 scripts/run_review_panel.py --task-dir "$TASK_DIR" --draft draft-23-初�
 ## 维护
 
 改了卡片或路由目录，按上面[读卡与核对](#读卡与核对)重建指纹再核。改稿手册在 `references/revision/`，条目原样保留出处，改过要核链接；审稿员脚本 `scripts/run_review_panel.py` 按条目锚点截取标准，手册改了锚点要跟着改脚本里的分组。改完跑 `python3 scripts/check_integrity.py`：它核方法快照和本地链接，并调用 `check_templates.py` 核故事卡和写法卡。Codex 和 Claude Code 用同一套脚本，不用钩子。
+
+改审稿脚本时运行 `python3 -B -m unittest discover -s tests -v`，离线核输出归属、失败记录和范围分组，不调用模型。提示语的效果另用实际样例检查，不能把脚本测试通过当成写作效果已验证。
