@@ -115,4 +115,4 @@
 
 这些是改稿的执行方法，不是要求每稿开一次会、找固定数量的人或做一次打分。只改一个具体问题时，保留其他有效部分。
 
-方法依据另见：现行创作入口（`workflows/creation_teacher`）、口语节奏：先完整，再简洁（`methods/style_guide/style-guide-one-thought-per-sentence`）、创作归档与修改反馈（`workflows/creation_archive`）。
+方法依据另见：知识库创作老师页（`workflows/creation_teacher`）、口语节奏：先完整，再简洁（`methods/style_guide/style-guide-one-thought-per-sentence`）、创作归档与修改反馈（`workflows/creation_archive`）。
