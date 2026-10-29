@@ -20,8 +20,8 @@
   "source_files": [
     {
       "path": "SKILL.md",
-      "sha256": "c8554494eb9c4b5718adb29058a03e264fcaec89af99a8dfb799b77da6c5962e",
-      "bytes": 12758
+      "sha256": "2c3eb04c3e0d3a94893769af5920c2f1033f73b5e5005bf89bab83aa7de2b9cb",
+      "bytes": 13121
     },
     {
       "path": "agents/first-reader.md",
@@ -520,8 +520,8 @@
     },
     {
       "path": "templates/story-workbench.md",
-      "sha256": "130ca8d55ed16a552789a3a08f200d3d14e29b86b9e64dbf1a9caa4d919d4bb2",
-      "bytes": 5001
+      "sha256": "d8c6379913cf5c5f2e84c9a45553fe7d17328f1c161731905e8616b00fc3b654",
+      "bytes": 5459
     },
     {
       "path": "templates/voiceover-delivery.md",
@@ -565,6 +565,29 @@
       "synced_at": "2026-10-29T15:42:13+08:00",
       "note": "同步本机技能 2026-10-29 当天三轮改动：时长规则与用意审稿员；技能说明触发与边界、删重复（另一个助手）；看点候选与观众问题。source_files 为本次同步后的清单。",
       "changed_skill_files": 11,
+      "source_byte_comparison": {
+        "matched": 102,
+        "mismatched": 0
+      },
+      "skill_integrity": {
+        "exit_code": 0,
+        "local_links": 225,
+        "errors": 0
+      },
+      "full_checks_on_installed_skill": {
+        "commands": 16,
+        "tests": "254/254",
+        "checks": "66/66"
+      },
+      "sensitive_literal_scan_of_added_lines": {
+        "findings": 0
+      },
+      "model_calls": 0
+    },
+    {
+      "synced_at": "2026-10-29T16:00:35+08:00",
+      "note": "同步写法卡用法的改动：配写法卡先说清用在哪一段、改什么；分段计划加写法卡一列；起草规矩加“具体动作或细节”一句（试行）。source_files 为本次同步后的清单。",
+      "changed_skill_files": 2,
       "source_byte_comparison": {
         "matched": 102,
         "mismatched": 0
