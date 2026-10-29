@@ -30,6 +30,7 @@ DEFAULT_AUDIENCE = '未提供（任务受众未确认）'
 DEFAULT_MEDIUM = '未提供（形式与时长未确认）'
 DEFAULT_KEY_FILE = Path.home()/'.config/story-craft/deepseek.env'
 MAX_TOKENS = 8192
+ATTEMPTS_SEMANTICS = 'client_request_attempts_not_provider_receipts_or_billing'
 
 def now():
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -152,9 +153,15 @@ def read_budget(path,create=False,limit=None):
         raise Failure('budget_limit_increase','已有账本不能通过命令行调高，请先与用户确认额度。')
     return data
 
+def budget_used(data):
+    # Old/unknown entries remain charged. Only an explicit current-run release
+    # after a persisted terminal receipt exempts a proven unstarted reservation.
+    return sum(not (x.get('quota_released') is True and x.get('call_stage')=='not_started'
+                    and x.get('client_request_attempts')==0) for x in data['attempts'])
+
 def available(data,count):
     if data.get('stop_reason'):raise Failure('budget_stopped','该账本已停用：'+str(data['stop_reason']))
-    if len(data['attempts'])+count>data['limit']:
+    if budget_used(data)+count>data['limit']:
         raise Failure('budget_exhausted','剩余额度不足以送出全部稿件，一份也未发送；请先询问用户。')
 
 def lock_parent(path):
@@ -187,9 +194,13 @@ def reserve(path,out,request_hash):
         available(data,1);item=attempt(out,request_hash);data['attempts'].append(item)
     return item['id']
 
-def settle(path,attempt_id,status,usage=None,reason=None,halt=False):
+def settle(path,attempt_id,status,usage=None,reason=None,halt=False,call_stage=None,client_request_attempts=None):
     with ledger(path) as data:
         item=next(x for x in data['attempts'] if x['id']==attempt_id)
+        if call_stage is not None:
+            release=(item['status']=='reserved' and call_stage=='not_started' and client_request_attempts==0)
+            item.update(call_stage=call_stage,client_request_attempts=client_request_attempts,
+                        attempts_semantics=ATTEMPTS_SEMANTICS,quota_released=release)
         item.update(status=status,finished_at=now(),usage=usage,reason=reason)
         if halt:data['stop_reason']=reason or status
 
@@ -288,8 +299,11 @@ def decode_response(raw):
 def run_one(item,key,source,budget,timeout):
     out=item['out'];draft=item['draft'];payload=item['payload'];attempt_id=item['id']
     request_text=json.dumps(payload,ensure_ascii=False)
+    # attempts is a client-call count (None when uncertain). An initial
+    # requesting snapshot is never terminal proof for historical quota release.
     receipt={'provider':'DeepSeek','endpoint':ENDPOINT,'requested_model':MODEL,'status':'requesting',
-             'started_at':now(),'independent_return':False,'attempts':1,'budget_attempt_id':attempt_id,
+             'started_at':now(),'independent_return':False,'attempts':0,'budget_attempt_id':attempt_id,
+             'attempts_semantics':ATTEMPTS_SEMANTICS,
              'request_sha256':sha(request_text),'reviewed_draft_sha256':sha(draft),'key_source':source,
              'task_context':item.get('task_context'),
              'execution':{'call_stage':'not_started','response_bytes_received':0,'nonempty_feedback_received':False,
@@ -303,10 +317,15 @@ def run_one(item,key,source,budget,timeout):
         write_json(target,receipt)
         (out/'draft-reviewed.md').write_text(draft,encoding='utf-8')
         (out/'request.json').write_text(request_text,encoding='utf-8')
+        # Revoke release eligibility BEFORE attempting the durable requesting
+        # transition: write/unlock failure must not look like a safe zero-call.
+        receipt['execution']['call_stage']='unknown'
+        receipt['attempts']=None
         with ledger(budget) as data:
             if data.get('stop_reason'):raise Failure('budget_stopped','该账本已停用，未发送此稿。')
             next(x for x in data['attempts'] if x['id']==attempt_id)['status']='requesting'
         receipt['execution']['call_stage']='attempted'
+        receipt['attempts']=1  # Client call attempt only; never provider receipt/billing.
         post_once(payload,key,timeout,trace)
         receipt['execution']['call_stage']='timed_out' if trace.get('timed_out') else 'returned'
         response_text,redacted=clean_response(bytes(trace['raw']),key)
@@ -355,7 +374,9 @@ def run_one(item,key,source,budget,timeout):
             receipt['response_redacted']=True
             write_json(out/'response.txt',saved)
         if error:
-            message=(error.message if receipt['execution']['call_stage']=='not_started' else
+            stage=receipt['execution']['call_stage']
+            message=(error.message if stage=='not_started' else
+                     '请求是否发起未确认，保留许可占次：'+error.reason if stage=='unknown' else
                      '已尝试独立审查，但未取得完整有效返回：'+error.reason)
             receipt.update(status='failed',independent_return=False,error_code=error.code,error=message)
         receipt['execution']['response_bytes_received']=len(trace['raw'])
@@ -366,7 +387,8 @@ def run_one(item,key,source,budget,timeout):
         write_json(target,receipt)
         if attempt_id:
             settle(budget,attempt_id,'completed' if receipt['independent_return'] else error.code,
-                   usage,reason=error.reason if error else None,halt=error.halt if error else False)
+                   usage,reason=error.reason if error else None,halt=error.halt if error else False,
+                   call_stage=receipt['execution']['call_stage'],client_request_attempts=receipt['attempts'])
     return {'independent_return':receipt['independent_return'],'status':receipt['status'],'http_status':receipt['http_status'],
             'usage':usage,'receipt':str(target),'feedback':str(out/'feedback.md') if receipt['independent_return'] else None,
             'task_context':receipt['task_context'],'execution':receipt['execution'],'review_state':receipt['review_state'],
@@ -423,19 +445,23 @@ def run(task_dir,draft_paths,audience=None,medium=None,key_file=None,budget_file
     except (OSError,ValueError,TypeError,UnicodeError):
         raise Failure('preflight_failed','参数、目录、稿件或配置预检失败，请修正后在同一任务目录重跑。')
     results=[]
+    unprocessed_ids={x['id'] for x in prepared}
     try:
         for item in prepared:
             with ledger(budget) as data:
                 if data.get('stop_reason'):break
+            # Active/uncertain workers must never be swept up as unused reservations.
+            unprocessed_ids.remove(item['id'])
             results.append(run_one(item,key,source,budget,timeout))
     finally:
-        cancel_reserved(budget,{x['id'] for x in prepared})
+        cancel_reserved(budget,unprocessed_ids)
     completed=len(results)==len(prepared) and all(x['independent_return'] for x in results)
     received=sum(x['independent_return'] for x in results)
     # Count client request attempts, not processed drafts or provider receipts/billing.
     attempted=sum(x['execution']['call_stage'] in ('attempted','returned','timed_out') for x in results)
     return {'independent_return':completed,'requested':len(prepared),'processed':len(results),
-            'sent':attempted,'sent_semantics':'client_request_attempts_not_provider_receipts_or_billing','results':results,
+            'sent':attempted,'sent_unknown':sum(x['execution']['call_stage']=='unknown' for x in results),
+            'sent_semantics':ATTEMPTS_SEMANTICS,'results':results,
             'task_context':context,'review_state':'reviews_received' if completed else
             'partial_reviews_received' if received else 'no_reviews_received',
             'author_adoption':'unknown','post_revision_check':'unknown','draft_quality':'not_assessed'}
@@ -454,8 +480,10 @@ def main():
 - 密钥顺序：--key-file、STORY_CRAFT_DEEPSEEK_KEY_FILE、用户配置目录 story-craft/deepseek.env、
   DEEPSEEK_API_KEY。脚本直读配置，认证头不落盘，回执仅记录来源类别。
 - 整批预检失败：零请求、零占次、零落盘；修正后原目录重跑。
-- 请求开始后即占次，不自动重试。401/403或402会停用账本，先修认证或余额；
-  不删除已发生的请求。排队超时保留账本，是否再试按剩余额度决定。
+- 已尝试请求、超时或是否发起不明均保留许可占次，不自动重试；不追退历史未知记录。
+  仅本轮可证明请求未开始、尚未进入 requesting 持久化转换的本地失败，留存回执后释放预留。
+  许可预算包含预留及未知占次；attempts/sent 表示客户端尝试证据，未知另记，不代表供应商收讫或计费。
+  401/403或402会停用账本，先修认证或余额；是否再试按剩余额度决定。
 - --timeout 同时限制网络读取与总时限（默认180秒，30–600）。
 - 输出：first-reader/递增序号-稿件名/，旧结果保留；request.json、draft-reviewed.md、
   response.txt/json、usage.json、receipt.json；仅有效返回生成 feedback.md。

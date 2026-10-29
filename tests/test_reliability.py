@@ -573,6 +573,311 @@ class FirstReaderReliabilityTests(OfflineCase):
         self.assertEqual(result["processed"], 1)
         self.assertEqual(result["sent_semantics"], "client_request_attempts_not_provider_receipts_or_billing")
 
+    def test_proven_not_started_failure_releases_one_budget_unit(self):
+        budget = self.base / "shared-budget.json"
+        budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": []}))
+        write = Path.write_text
+        def fail_draft_copy(path, *args, **kwargs):
+            if path.name == "draft-reviewed.md":
+                raise PermissionError("synthetic draft copy denied")
+            return write(path, *args, **kwargs)
+        with patch.object(Path, "write_text", fail_draft_copy):
+            first = self.run_reader(budget_file=budget)
+        self.post_mock.assert_not_called()
+        receipt_path = Path(first["results"][0]["receipt"])
+        saved_failure = receipt_path.read_bytes()
+        receipt = json.loads(saved_failure)
+        self.assertEqual(receipt["execution"]["call_stage"], "not_started")
+        self.assertEqual(receipt["status"], "failed")
+        self.assertEqual(first["sent"], 0)
+        after_failure = reader.read_budget(budget)
+        available_error = None
+        try:
+            reader.available(after_failure, 1)
+        except reader.Failure as exc:
+            available_error = exc.code
+        retry_error = None
+        with patch.object(reader, "post_once", side_effect=self.response()) as post:
+            try:
+                second = self.run_reader(budget_file=budget)
+            except reader.Failure as exc:
+                retry_error = exc.code
+            else:
+                with self.assertRaises(reader.Failure) as caught:
+                    self.run_reader(budget_file=budget)
+                self.assertEqual(caught.exception.code, "budget_exhausted")
+                self.assertEqual(post.call_count, 1)
+                self.assertEqual(receipt_path.read_bytes(), saved_failure)
+        self.assertIsNone(retry_error, "sent=0, post_once never called on failed copy; receipt.attempts=%s; "
+                          "available(1)=%s; ledger=%s" % (receipt["attempts"], available_error, after_failure))
+        self.assertIsNone(available_error)
+        self.assertEqual(receipt["attempts"], 0)
+        self.assertEqual(receipt["attempts_semantics"], first["sent_semantics"])
+        self.assertEqual(after_failure["limit"] - reader.budget_used(after_failure), 1)
+        self.assertTrue(second["independent_return"])
+        self.assertEqual(second["sent"], 1)
+        self.assertEqual(post.call_count, 1)
+        self.assertEqual(receipt_path.read_bytes(), saved_failure)
+        final = reader.read_budget(budget)
+        self.assertEqual(final["limit"], 1)
+        self.assertEqual(len(final["attempts"]), 2)
+        self.assertEqual(final["attempts"][0]["status"], "local_error")
+        self.assertTrue(final["attempts"][0]["quota_released"])
+        self.assertEqual(final["attempts"][0]["client_request_attempts"], 0)
+        self.assertEqual(final["attempts"][1]["status"], "completed")
+        self.assertEqual(final["attempts"][1]["client_request_attempts"], 1)
+        self.assertEqual(final["limit"] - reader.budget_used(final), 0)
+        with self.assertRaises(reader.Failure) as caught:
+            reader.available(final, 1)
+        self.assertEqual(caught.exception.code, "budget_exhausted")
+
+    def test_request_file_failure_also_releases_only_after_preserving_receipt(self):
+        budget = self.base / "request-failure-budget.json"
+        budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": []}))
+        write = Path.write_text
+        def fail_request(path, *args, **kwargs):
+            if path.name == "request.json":
+                raise PermissionError("synthetic request write denied")
+            return write(path, *args, **kwargs)
+        with patch.object(Path, "write_text", fail_request):
+            result = self.run_reader(budget_file=budget)
+        self.post_mock.assert_not_called()
+        receipt = json.loads(Path(result["results"][0]["receipt"]).read_text())
+        data = reader.read_budget(budget)
+        self.assertEqual(receipt["attempts"], 0)
+        self.assertEqual(receipt["execution"]["call_stage"], "not_started")
+        self.assertEqual(data["attempts"][0]["status"], "local_error")
+        self.assertTrue(data["attempts"][0]["quota_released"])
+        self.assertEqual(reader.budget_used(data), 0)
+        reader.available(data, 1)
+        self.assertTrue(Path(result["results"][0]["receipt"]).with_name("draft-reviewed.md").is_file())
+
+    def test_historical_reserved_unknown_or_missing_stage_never_refunded(self):
+        historical = [
+            {"id": "old-reserved", "status": "reserved"},
+            {"id": "old-requesting", "status": "requesting"},
+            {"id": "old-local-error", "status": "local_error"},
+            {"id": "old-unstarted", "status": "local_error", "call_stage": "not_started", "client_request_attempts": 0},
+            {"id": "old-unknown", "status": "local_error", "call_stage": "unknown", "client_request_attempts": None},
+            {"id": "ambiguous-release", "status": "local_error", "call_stage": "unknown", "client_request_attempts": 0, "quota_released": True},
+        ]
+        for entry in historical:
+            with self.subTest(entry=entry):
+                budget = self.base / (entry["id"] + ".json")
+                budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": [entry]}))
+                original = budget.read_bytes()
+                self.assertEqual(reader.budget_used(reader.read_budget(budget)), 1)
+                with self.assertRaises(reader.Failure) as caught:
+                    self.run_reader(budget_file=budget)
+                self.assertEqual(caught.exception.code, "budget_exhausted")
+                self.assertEqual(budget.read_bytes(), original)
+        self.post_mock.assert_not_called()
+
+    def test_requesting_persistence_failures_are_unknown_and_remain_charged(self):
+        for after_write in [False, True]:
+            with self.subTest(after_write=after_write):
+                budget = self.base / ("transition-after.json" if after_write else "transition-before.json")
+                budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": []}))
+                write_json = reader.write_json
+                failed = []
+                def fail_transition(path, value):
+                    if path == budget and any(x["status"] == "requesting" for x in value["attempts"]) and not failed:
+                        if after_write:
+                            write_json(path, value)
+                        failed.append(json.loads(budget.read_text())["attempts"][0]["status"])
+                        raise OSError("synthetic ambiguous requesting persistence")
+                    return write_json(path, value)
+                with patch.object(reader, "write_json", side_effect=fail_transition):
+                    result = self.run_reader(budget_file=budget)
+                self.assertEqual(failed, ["requesting" if after_write else "reserved"])
+                self.post_mock.assert_not_called()
+                receipt = json.loads(Path(result["results"][0]["receipt"]).read_text())
+                data = reader.read_budget(budget)
+                self.assertEqual(receipt["execution"]["call_stage"], "unknown")
+                self.assertIsNone(receipt["attempts"])
+                self.assertEqual(result["sent_unknown"], 1)
+                self.assertIn("是否发起未确认", result["results"][0]["message"])
+                self.assertFalse(data["attempts"][0]["quota_released"])
+                self.assertIsNone(data["attempts"][0]["client_request_attempts"])
+                self.assertEqual(reader.budget_used(data), 1)
+                saved = budget.read_bytes()
+                with self.assertRaises(reader.Failure) as caught:
+                    self.run_reader(budget_file=budget)
+                self.assertEqual(caught.exception.code, "budget_exhausted")
+                self.assertEqual(budget.read_bytes(), saved)
+
+    def test_failed_terminal_evidence_does_not_release_active_reservation(self):
+        for failed_name in ["receipt.json", "usage.json"]:
+            with self.subTest(failed_name=failed_name):
+                budget = self.base / (failed_name + ".budget.json")
+                budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": []}))
+                write = Path.write_text
+                receipt_writes = []
+                def fail_evidence(path, *args, **kwargs):
+                    if path.name == "receipt.json":
+                        receipt_writes.append(1)
+                    if path.name == "draft-reviewed.md" or (path.name == failed_name and
+                            (failed_name != "receipt.json" or len(receipt_writes) == 2)):
+                        raise PermissionError("synthetic final evidence unavailable")
+                    return write(path, *args, **kwargs)
+                with patch.object(Path, "write_text", fail_evidence), self.assertRaises(OSError):
+                    self.run_reader(budget_file=budget)
+                self.post_mock.assert_not_called()
+                data = reader.read_budget(budget)
+                self.assertEqual(len(data["attempts"]), 1)
+                self.assertEqual(data["attempts"][0]["status"], "reserved")
+                self.assertNotIn("quota_released", data["attempts"][0])
+                self.assertEqual(reader.budget_used(data), 1)
+                with self.assertRaises(reader.Failure) as caught:
+                    reader.available(data, 1)
+                self.assertEqual(caught.exception.code, "budget_exhausted")
+
+    def test_interrupted_active_worker_is_not_cancelled_as_unprocessed(self):
+        budget = self.base / "interrupted-budget.json"
+        budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": []}))
+        with patch.object(reader, "run_one", side_effect=KeyboardInterrupt), self.assertRaises(KeyboardInterrupt):
+            self.run_reader(budget_file=budget)
+        data = reader.read_budget(budget)
+        self.assertEqual(len(data["attempts"]), 1)
+        self.assertEqual(data["attempts"][0]["status"], "reserved")
+        self.assertEqual(reader.budget_used(data), 1)
+        self.post_mock.assert_not_called()
+
+    def test_attempted_errors_timeout_and_feedback_write_failure_keep_charge(self):
+        for kind in ["post_oserror", "timeout", "transport_error", "feedback_write"]:
+            with self.subTest(kind=kind):
+                budget = self.base / (kind + ".json")
+                budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": []}))
+                respond = self.response()
+                def post(payload, key, timeout, trace):
+                    if kind == "post_oserror":
+                        raise OSError("synthetic post error")
+                    if kind == "timeout":
+                        trace["timed_out"] = True
+                    elif kind == "transport_error":
+                        trace["transport_error"] = True
+                    else:
+                        respond(payload, key, timeout, trace)
+                write = Path.write_text
+                def write_feedback(path, *args, **kwargs):
+                    if kind == "feedback_write" and path.name == "feedback.md":
+                        raise PermissionError("synthetic feedback write denied")
+                    return write(path, *args, **kwargs)
+                with patch.object(reader, "post_once", side_effect=post) as called, patch.object(Path, "write_text", write_feedback):
+                    result = self.run_reader(budget_file=budget)
+                    self.assertEqual(called.call_count, 1)
+                    with self.assertRaises(reader.Failure) as caught:
+                        self.run_reader(budget_file=budget)
+                    self.assertEqual(caught.exception.code, "budget_exhausted")
+                    self.assertEqual(called.call_count, 1)
+                receipt = json.loads(Path(result["results"][0]["receipt"]).read_text())
+                data = reader.read_budget(budget)
+                self.assertEqual(result["sent"], 1)
+                self.assertEqual(result["sent_unknown"], 0)
+                self.assertEqual(receipt["attempts"], 1)
+                self.assertEqual(receipt["status"], "failed")
+                self.assertFalse(data["attempts"][0]["quota_released"])
+                self.assertEqual(data["attempts"][0]["client_request_attempts"], 1)
+                self.assertEqual(reader.budget_used(data), 1)
+
+    def test_stale_initial_receipt_does_not_refund_after_attempted_finalization_failure(self):
+        budget = self.base / "finalization-budget.json"
+        budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": []}))
+        write = Path.write_text
+        def fail_usage(path, *args, **kwargs):
+            if path.name == "usage.json":
+                raise PermissionError("synthetic usage save denied")
+            return write(path, *args, **kwargs)
+        with patch.object(reader, "post_once", side_effect=self.response()) as post, patch.object(Path, "write_text", fail_usage):
+            with self.assertRaises(OSError):
+                self.run_reader(budget_file=budget)
+        self.assertEqual(post.call_count, 1)
+        data = reader.read_budget(budget)
+        self.assertEqual(data["attempts"][0]["status"], "requesting")
+        self.assertNotIn("quota_released", data["attempts"][0])
+        initial = json.loads((Path(data["attempts"][0]["output_dir"]) / "receipt.json").read_text())
+        self.assertEqual(initial["status"], "requesting")
+        self.assertEqual(initial["attempts"], 0)  # Initial snapshot, not terminal proof.
+        self.assertEqual(reader.budget_used(data), 1)
+        with self.assertRaises(reader.Failure) as caught:
+            self.run_reader(budget_file=budget)
+        self.assertEqual(caught.exception.code, "budget_exhausted")
+
+    def test_requesting_unlock_error_keeps_unknown_attempt_charged(self):
+        budget = self.base / "unlock-budget.json"
+        budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": []}))
+        ledger = reader.ledger
+        failed = []
+        @contextlib.contextmanager
+        def fail_exit(path):
+            with ledger(path) as data:
+                yield data
+                fail = any(x["status"] == "requesting" for x in data["attempts"]) and not failed
+            if fail:
+                failed.append(True)
+                raise OSError("synthetic unlock failure after requesting write")
+        with patch.object(reader, "ledger", fail_exit):
+            result = self.run_reader(budget_file=budget)
+        self.post_mock.assert_not_called()
+        receipt = json.loads(Path(result["results"][0]["receipt"]).read_text())
+        self.assertEqual(failed, [True])
+        self.assertEqual(receipt["execution"]["call_stage"], "unknown")
+        self.assertIsNone(receipt["attempts"])
+        self.assertEqual(result["sent_unknown"], 1)
+        data = reader.read_budget(budget)
+        self.assertEqual(reader.budget_used(data), 1)
+        self.assertFalse(data["attempts"][0]["quota_released"])
+        with self.assertRaises(reader.Failure) as caught:
+            self.run_reader(budget_file=budget)
+        self.assertEqual(caught.exception.code, "budget_exhausted")
+
+    def test_only_current_unprocessed_reservations_cancel_after_provider_stop(self):
+        budget = self.base / "stop-budget.json"
+        budget.write_text(json.dumps({"authorized": True, "limit": 2, "attempts": []}))
+        (self.task / "other.md").write_text("Other synthetic draft.")
+        with patch.object(reader, "post_once", side_effect=self.response(status=402)) as post:
+            result = reader.run(self.task, ["draft.md", "other.md"], budget_file=budget, allow_external=True)
+        self.assertEqual(post.call_count, 1)
+        self.assertEqual(result["requested"], 2)
+        self.assertEqual(result["processed"], 1)
+        self.assertEqual(result["sent"], 1)
+        data = reader.read_budget(budget)
+        self.assertEqual(data["limit"], 2)
+        self.assertEqual(len(data["attempts"]), 1)
+        self.assertEqual(data["attempts"][0]["status"], "payment_required")
+        self.assertEqual(reader.budget_used(data), 1)
+        self.assertTrue(data["stop_reason"])
+
+    def test_settle_write_failure_keeps_active_reservation_charged(self):
+        budget = self.base / "settle-failure-budget.json"
+        budget.write_text(json.dumps({"authorized": True, "limit": 1, "attempts": []}))
+        write, write_json = Path.write_text, reader.write_json
+        failed = []
+        def fail_draft(path, *args, **kwargs):
+            if path.name == "draft-reviewed.md":
+                raise PermissionError("synthetic draft copy denied")
+            return write(path, *args, **kwargs)
+        def fail_settle(path, value):
+            if path == budget and any(x.get("quota_released") is True for x in value["attempts"]):
+                failed.append(True)
+                raise OSError("synthetic quota settlement write denied")
+            return write_json(path, value)
+        with patch.object(Path, "write_text", fail_draft), patch.object(reader, "write_json", side_effect=fail_settle):
+            with self.assertRaises(OSError):
+                self.run_reader(budget_file=budget)
+        self.assertEqual(failed, [True])
+        self.post_mock.assert_not_called()
+        data = reader.read_budget(budget)
+        self.assertEqual(len(data["attempts"]), 1)
+        self.assertEqual(data["attempts"][0]["status"], "reserved")
+        self.assertEqual(reader.budget_used(data), 1)
+        receipt = json.loads((Path(data["attempts"][0]["output_dir"]) / "receipt.json").read_text())
+        self.assertEqual(receipt["status"], "failed")
+        self.assertEqual(receipt["attempts"], 0)
+        with self.assertRaises(reader.Failure) as caught:
+            self.run_reader(budget_file=budget)
+        self.assertEqual(caught.exception.code, "budget_exhausted")
+
     def test_reader_external_shared_budget_retained(self):
         budget = self.base / "shared-budget.json"
         budget.write_text(json.dumps({"authorized": True, "limit": 6, "attempts": []}))
