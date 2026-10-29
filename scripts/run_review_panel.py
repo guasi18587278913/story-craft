@@ -1,7 +1,8 @@
 """起八位审稿员按改稿手册原文分组审稿：每位只拿自己那几条标准的全文，逐句出意见，不改稿。
+另起一位用意审稿员（第 10 位），只拿稿子，逐句、再逐段问想让观众明白什么、没读过原文的人能不能自己说出来。
 
 审稿员用另一家模型：--engine codex 调 `codex exec`，--engine claude 调 `claude -p`。
---prompts-only 只生成八份审稿提示，不调用任何模型。不自动重试。
+--prompts-only 只生成审稿提示，不调用任何模型。不自动重试。
 """
 import argparse
 import concurrent.futures as cf
@@ -32,6 +33,8 @@ GROUPS = [
     ("8-语气人设", "body.md", ids("m", 43, 52), False),
 ]
 TITLE_GROUP = ("9-标题封面", "structure.md", ids("p", 18, 22), False)
+# 用意审稿员不按手册条目，只问两件事；不给看点和原材料，当自己是第一次听的普通人
+INTENT_GROUP = ("10-用意", None, [], False)
 ANCHOR = re.compile(r'^<a id="([a-z0-9]+)"></a>\s*$', re.M)
 
 
@@ -67,8 +70,30 @@ ISOLATION = ("这次审稿只用下面给的标准和材料。你所在的电脑
              "这次一律不用：不要调用任何技能、知识库或其他工具，不要读别的文件，也不要照别的说明另加步骤或格式。")
 
 
+def intent_prompt(name, draft, audience, medium):
+    parts = [
+        "你是审稿员“%s”。只做诊断，不改稿。" % name,
+        ISOLATION,
+        "稿子写给：%s。形式：%s。" % (audience, medium),
+        "你只拿到稿子，没有原材料、写稿提示和看点，也不知道作者打算写什么。把自己当成第一次刷到这条视频、只听一遍的普通人。",
+        "从第一句到最后一句，逐句问自己两件事：",
+        "1. 这句想让观众明白什么？用一句大白话写下来。",
+        "2. 没读过原文、只听一遍的人，能不能自己说出这一点？判“能”“说不全”或“说不出”。只有这句（连同前面已经说过的话）把这一点直接说出来了，才算“能”。要观众自己从例子、反差、数字、比喻里推出来的，哪怕你推得出来，也算“说不全”；要靠行业常识，或者要等后文才回过头明白的，也算“说不全”；听完会理解成别的意思的，算“说不出”。判“说不全”“说不出”的，写清卡在哪：哪个词，哪个没交代的前提，哪个想说却没说出口的结论。",
+        "逐句看完，再逐段问一遍同样两件事：这段想让观众明白什么？只听一遍的人能不能自己说出来？",
+        "事实对不对、文采好不好、用没用技巧都不管，只看这两件事。",
+        "做法分两步。",
+        "第一步，逐句过，再逐段过，每句、每段都要判，但只列判“说不全”和“说不出”的：原句或第几段 → 想让观众明白什么 → 说不全／说不出 → 卡在哪。最后写一行：其余都判“能”。",
+        "第二步，按两类列意见：必须修＝说不出，或者会让人理解成别的意思；可选增强＝说不全，但不影响听懂这条视频在讲什么。每处一行：类别 → 原句 → 问题 → 修改方向。修改方向只说往哪改，不替作者写新句子，也不补稿子里没有的人物、经历、数字和因果。合并同一问题；没有就写无。",
+        "不要改写整篇，不要另交改好的稿子。用中文，1000 字以内。",
+        "=== 稿子开始 ===", draft, "=== 稿子结束 ===",
+    ]
+    return "\n\n".join(parts) + "\n"
+
+
 def build_prompt(group, draft, audience, medium, focus, source_text, titles):
     name, manual, keys, with_source = group
+    if manual is None:
+        return intent_prompt(name, draft, audience, medium)
     standards = sections((REV / manual).read_text(encoding="utf-8"), keys)
     label = "篇章手册" if manual == "structure.md" else "正文手册"
     parts = [
@@ -164,7 +189,7 @@ def main():
     p.add_argument("--medium", default="短视频口播，配音念出来给人听")
     p.add_argument("--focus", default="", help="这篇只讲的那一点，发给结构、开头、结尾三位")
     p.add_argument("--engine", choices=["codex", "claude"])
-    p.add_argument("--groups", default="1,2,3,4,5,6,7,8", help="逗号分隔的审稿员编号；9 是标题封面")
+    p.add_argument("--groups", default="1,2,3,4,5,6,7,8,10", help="逗号分隔的审稿员编号；9 是标题封面，10 是用意审稿员")
     p.add_argument("--prompts-only", action="store_true", help="只生成审稿提示，不调用模型")
     p.add_argument("--timeout", type=int, default=1800, help="每位审稿员的时限（秒）；带原材料的第 5 位最慢")
     p.add_argument("--effort", default="xhigh", help="Codex 的思考强度，默认 xhigh；Claude 用它自己的默认")
@@ -181,7 +206,7 @@ def main():
         raise SystemExit("要调用模型时必须写 --engine codex 或 --engine claude；只生成提示用 --prompts-only")
     draft = draft_path.read_text(encoding="utf-8").strip()
     wanted = [g.strip() for g in a.groups.split(",") if g.strip()]
-    table = {g[0].split("-")[0]: g for g in GROUPS + [TITLE_GROUP]}
+    table = {g[0].split("-")[0]: g for g in GROUPS + [TITLE_GROUP, INTENT_GROUP]}
     unknown = [g for g in wanted if g not in table]
     if unknown:
         raise SystemExit("没有这些审稿员：" + "、".join(unknown))

@@ -20,18 +20,18 @@
   "source_files": [
     {
       "path": "SKILL.md",
-      "sha256": "19e52101c12aaa03a25190458eddc442dc63aa20ac686cee155e438d5b06d0ed",
-      "bytes": 11579
+      "sha256": "c8554494eb9c4b5718adb29058a03e264fcaec89af99a8dfb799b77da6c5962e",
+      "bytes": 12758
     },
     {
       "path": "agents/first-reader.md",
-      "sha256": "2dfc23ffcd726c3ac92d75523453bf7d35e93406947493753e0423b09a431cc4",
-      "bytes": 5007
+      "sha256": "3857ed745d31fb3f9818078216b430c71d4feba75ab20c7cdd97afd5d011cfe4",
+      "bytes": 5016
     },
     {
       "path": "agents/openai.yaml",
-      "sha256": "f340cb9af91fcec5bf88b199b013e2b80b49c37e7fed94cfb9fedc97021f52c0",
-      "bytes": 331
+      "sha256": "8eb1b3ef035344a26ac90303689dd8c8c6d019c7f6b754bcc4d011e495e772e1",
+      "bytes": 250
     },
     {
       "path": "references/adaptation.md",
@@ -45,8 +45,8 @@
     },
     {
       "path": "references/materials-and-angle.md",
-      "sha256": "e8fc59486f7d43b062bfe35015052bdcfdf80f107ef261308405f87ac1aabf91",
-      "bytes": 7322
+      "sha256": "bf19228957352cac970dec5d5a3f0b12c436fb7633748e5a7ef6208e3cdec953",
+      "bytes": 7682
     },
     {
       "path": "references/research-coverage.md",
@@ -65,13 +65,13 @@
     },
     {
       "path": "references/revision/index.md",
-      "sha256": "4fd476c72792117f4dfad970e0ffb978d80529625e7e69f114a6580ebaaa6d82",
-      "bytes": 9211
+      "sha256": "2d82bbae27527865d29e8a5e156d974d33239b0cc061dc24434d2bca2970afb0",
+      "bytes": 9474
     },
     {
       "path": "references/revision/method.md",
-      "sha256": "4e08d3543f09147f9f70562ff5618e66cdb29c14b0b0fecc281835531abb6e01",
-      "bytes": 8863
+      "sha256": "ec422da262f88761e330bd9b85da644c174332407a5de43ea1fcade4c50b755f",
+      "bytes": 8869
     },
     {
       "path": "references/revision/structure.md",
@@ -85,13 +85,13 @@
     },
     {
       "path": "references/script-usage.md",
-      "sha256": "fb83b07b351e265231cc8589472e20003c7b2725b309756011c04b078f262c3e",
-      "bytes": 6313
+      "sha256": "594175595e28cc30b62d51cd205d5124f5b1b213db9199e4ba613d67b034e37b",
+      "bytes": 7045
     },
     {
       "path": "references/source-map.md",
-      "sha256": "16e690ec1a1ce09657447cdfacac9dc1548b83e21fc56d7b19712af9e9d74d86",
-      "bytes": 3448
+      "sha256": "fa4b307e9a16dd86f4ada70654afc7dbb43218d95aa1d958b91c37b9c13e77df",
+      "bytes": 3399
     },
     {
       "path": "references/story-cards/09-拿自己做成的案例拆方法.md",
@@ -505,13 +505,13 @@
     },
     {
       "path": "scripts/run_review_panel.py",
-      "sha256": "f6fb9391bfee9f0925fbc0f22c53639c3e8052cef64a1c2d9182f0f811da6908",
-      "bytes": 12635
+      "sha256": "23e3289de0238d03cb3df2c871711c8529e8415a7c7472a26779f058498d82aa",
+      "bytes": 15389
     },
     {
       "path": "templates/material-checklist.md",
-      "sha256": "72181712f0522ca2e42dc5fde5bd30f993e2fc29d38329953f59449576e49e58",
-      "bytes": 9561
+      "sha256": "207460e355e64856e8b875e81f4218d382219fb3df89357fbfd611cdc54f2e9b",
+      "bytes": 12492
     },
     {
       "path": "templates/person-card.md",
@@ -520,8 +520,8 @@
     },
     {
       "path": "templates/story-workbench.md",
-      "sha256": "ed5ba6bd17e247ed6aa07883d8a9e428a1353c52c3bb6e02f21fa982079ae63d",
-      "bytes": 4671
+      "sha256": "130ca8d55ed16a552789a3a08f200d3d14e29b86b9e64dbf1a9caa4d919d4bb2",
+      "bytes": 5001
     },
     {
       "path": "templates/voiceover-delivery.md",
@@ -559,5 +559,30 @@
     },
     "model_calls": 0,
     "live_wiki_comparison": "not_run"
-  }
+  },
+  "syncs": [
+    {
+      "synced_at": "2026-10-29T15:42:13+08:00",
+      "note": "同步本机技能 2026-10-29 当天三轮改动：时长规则与用意审稿员；技能说明触发与边界、删重复（另一个助手）；看点候选与观众问题。source_files 为本次同步后的清单。",
+      "changed_skill_files": 11,
+      "source_byte_comparison": {
+        "matched": 102,
+        "mismatched": 0
+      },
+      "skill_integrity": {
+        "exit_code": 0,
+        "local_links": 225,
+        "errors": 0
+      },
+      "full_checks_on_installed_skill": {
+        "commands": 16,
+        "tests": "254/254",
+        "checks": "66/66"
+      },
+      "sensitive_literal_scan_of_added_lines": {
+        "findings": 0
+      },
+      "model_calls": 0
+    }
+  ]
 }

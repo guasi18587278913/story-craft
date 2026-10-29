@@ -2,9 +2,8 @@
 
 按当前问题回查，不在普通创作中加载全部来源。本 Skill 是对用户自媒体知识库的综合整理；卡片、练习和判断表中有编辑归纳，不冒充原作者原话。原文用 `gbrain_sc_media.get_page(slug)` 读取；研究缓存只用于核对历史研究证据，不直接读取 Wiki 正本。
 
-## 当前使用入口
+## 各环节在知识库里的页面
 
-- 工作边界与任务路由：`workflows/creation_teacher`。
 - 选材和角度：`workflows/topic_planning`、`methods/playbook/playbook-topic-divergence`。
 - 故事基本概念：`concepts/storytelling`。
 - 结构：`concepts/structure_quick` → `concepts/structure` 中选中的条目。

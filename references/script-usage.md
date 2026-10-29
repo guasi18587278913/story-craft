@@ -56,10 +56,14 @@ python3 scripts/check_quotes_numbers.py --source "$TASK_DIR/source.md" --draft "
 python3 scripts/run_review_panel.py --task-dir "$TASK_DIR" --draft draft-23-初稿.md --engine codex --audience "普通人，不是工程师" --medium "抖音口播，AI 配音，两分钟以内" --focus "这篇只讲的那一点"
 ```
 
-在 Claude Code 里写的稿用 `--engine codex`，在 Codex 里写的用 `--engine claude`。脚本按[改稿](revision/index.md#2-八个审稿员分组审)的分组，从改稿手册截出每位审稿员那几条标准的全文，第 5 位另带风险反例和 `source.md`，八位同时跑，意见存在 `review/<稿名>/`，提示存在 `review/<稿名>/prompts/`，汇总在 `summary.json`。`--groups 1,4,5` 只跑其中几位；`--groups 9` 是标题封面那位，只在要起标题时用。`--prompts-only` 只生成提示、不调用模型，给另一家用不了时改用本工具干净会话去审。Codex 审稿员的思考强度默认 xhigh，用 `--effort` 改；Claude 审稿员用它自己的默认。失败或超时的那一位记在汇总里，不自动重试，退出码非零。
+在 Claude Code 里写的稿用 `--engine codex`，在 Codex 里写的用 `--engine claude`。脚本按[改稿](revision/index.md#2-八个审稿员分组审)的分组，从改稿手册截出每位审稿员那几条标准的全文，第 5 位另带风险反例和 `source.md`；第 10 位是用意审稿员，只拿稿子、观众和形式，逐句、再逐段问想让观众明白什么、没读过原文的人能不能自己说出来。默认这九位同时跑，意见存在 `review/<稿名>/`，提示存在 `review/<稿名>/prompts/`，汇总在 `summary.json`。`--groups 1,4,5` 只跑其中几位；`--groups 9` 是标题封面那位，只在要起标题时用；`--groups 10` 只跑用意审稿员。`--prompts-only` 只生成提示、不调用模型，给另一家用不了时改用本工具干净会话去审。Codex 审稿员的思考强度默认 xhigh，用 `--effort` 改；Claude 审稿员用它自己的默认。失败或超时的那一位记在汇总里，不自动重试，退出码非零。
 
 审稿提示会按是否拿到原材料区分判断依据：只有第 5 位核对来源并引用原句，其余只据稿面诊断。意见按“必须修／待核原文／可选增强”输出，由写稿方核实后取舍；脚本的成功状态只表示取得返回，不证明分类、事实判断或建议正确。
 
 ## 首读
 
 范围与命令在[首读执行](../agents/first-reader.md)，故障处理与配置顺序看 `run_first_reader.py --help`。只运行已有脚本，不用钩子，不把认证信息放进稿件或提示词。
+
+## 维护
+
+改了卡片或路由目录，按上面[读卡与核对](#读卡与核对)重建指纹再核。改稿手册在 `references/revision/`，条目原样保留出处，改过要核链接；审稿员脚本 `scripts/run_review_panel.py` 按条目锚点截取标准，手册改了锚点要跟着改脚本里的分组。改完跑 `python3 scripts/check_integrity.py`：它核方法快照和本地链接，并调用 `check_templates.py` 核故事卡和写法卡。Codex 和 Claude Code 用同一套脚本，不用钩子。
