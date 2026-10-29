@@ -1,0 +1,4 @@
+interface:
+  display_name: "故事创作老师"
+  short_description: "基于自媒体知识库，从真实材料到人物与故事成稿、改稿和逐环节验收"
+  default_prompt: "请用 $story-craft，结合我提供的材料和自媒体知识库，先判断当前故事的主要问题，再完成我需要的创作环节。"

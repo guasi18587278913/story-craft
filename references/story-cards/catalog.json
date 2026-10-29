@@ -1,0 +1,433 @@
+{
+  "story": [
+    {
+      "id": "9",
+      "name": "拿自己做成的案例拆方法",
+      "file": "09-拿自己做成的案例拆方法.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "7ebdcb2faabf9c2a518f58a43a819ac21782dcb6a080130ecbd91f177458b6b6"
+    },
+    {
+      "id": "10",
+      "name": "拆别人的生意怎么赚钱",
+      "file": "10-拆别人的生意怎么赚钱.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "f193409773b986c7a24a7c5e223b9d8e67089cdb68893fd781601f6266e93dea"
+    },
+    {
+      "id": "17",
+      "name": "检讨共鸣",
+      "file": "17-检讨共鸣.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "b46ce8e849ad34f2e64d5d259d2e7da06226fddad88ec36ad5fe4d243c9e04e9"
+    },
+    {
+      "id": "18",
+      "name": "回应偏见",
+      "file": "18-回应偏见.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "bbdaf03a73b9ad3a6c0221c282be82a27c519638e275349267238577be3f6347"
+    },
+    {
+      "id": "20",
+      "name": "从一件事看懂一个现象",
+      "file": "20-从一件事看懂一个现象.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "78a6f0ba4cc482a43f567f885b616db423d3c33065c2ce4db957d764dea8e389"
+    },
+    {
+      "id": "23",
+      "name": "困境转机",
+      "file": "23-困境转机.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "f62bd2c2f74e5ebc7a1fe21cf0d0faa3d78fde4ac77b06b847e08fbf95dedfa2"
+    },
+    {
+      "id": "26",
+      "name": "我帮别人成了事",
+      "file": "26-我帮别人成了事.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "df5289c58ec576bca1b246467608412a911e11253cc8cf6741a351e0c0e36ccb"
+    },
+    {
+      "id": "27",
+      "name": "讲别人怎么做成的",
+      "file": "27-讲别人怎么做成的.md",
+      "status": "只有骨架｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "914523455709a815adff72fa1f2480eb179aae557dc149f474a78be72edfc6bf"
+    },
+    {
+      "id": "28",
+      "name": "平凡英雄",
+      "file": "28-平凡英雄.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "4a03304c8d07ec3f6bf4ec941254af2319b40a98f93ff72fa12bd584cd8cd621"
+    },
+    {
+      "id": "29",
+      "name": "苦难经历",
+      "file": "29-苦难经历.md",
+      "status": "只有骨架｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "543bdc2fccbe6b56c27a8fdbb1998967911b8a85a4d41654f3961a60f6e6ddc4"
+    },
+    {
+      "id": "30",
+      "name": "折腾经历",
+      "file": "30-折腾经历.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "0a9cb623859047615f5c9446533064af182ba1a816f5e3ffd1f98eeb0d093fbf"
+    },
+    {
+      "id": "31",
+      "name": "帮助弱者",
+      "file": "31-帮助弱者.md",
+      "status": "只有骨架｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "0aae9b36970f90df5c72d8ea4b3fe172baadb9afd34ffa37014d67b812cd360e"
+    },
+    {
+      "id": "32",
+      "name": "后知后觉的爱",
+      "file": "32-后知后觉的爱.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "b04133613c22c5ebb23ec5fb1d1627a7b81e380bd89db75d7a0b116211f49a5d"
+    },
+    {
+      "id": "33",
+      "name": "关系里的一件小事",
+      "file": "33-关系里的一件小事.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "a64986a0c9b966a7039514e3ba2d01b6f658bcd9009da6b90091ea7aee28f877"
+    },
+    {
+      "id": "34",
+      "name": "人生选择",
+      "file": "34-人生选择.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "879c23405c085648d017511d35b02739f17e372ddfb93c37faca4efbf48e2585"
+    },
+    {
+      "id": "35",
+      "name": "过程记录",
+      "file": "35-过程记录.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "e094b2ff5c9a7e83b730b2ab883fda4c9c00f2eb8e21d915dacf7e4576d4d26a"
+    },
+    {
+      "id": "40",
+      "name": "替你去体验",
+      "file": "40-替你去体验.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "40bd54bf77e493e826b4b1942651871685d739c0279df2a1a1a7652ebf5f782a"
+    },
+    {
+      "id": "49",
+      "name": "热点加我的经历",
+      "file": "49-热点加我的经历.md",
+      "status": "完整范例｜试写：未试写｜用户认可：未确认",
+      "card_sha256": "50d4dc7536376e3dff0348bf61cd77fd3be7a25db7a9b258e57b8d69c4ba0e95"
+    }
+  ],
+  "writing": [
+    {
+      "id": "LN01",
+      "name": "击碎标签",
+      "file": "LN01-击碎标签.md",
+      "use": "整篇组织",
+      "card_sha256": "42bed1b93b5a612d842e3edda4916e6ae0860eee20b79c4c0836bf850a6bde27"
+    },
+    {
+      "id": "LN02",
+      "name": "生活被打断",
+      "file": "LN02-生活被打断.md",
+      "use": "整篇组织",
+      "card_sha256": "911042307027c6594241018629dcddf2f490943776d33176bb923018a1826ac0"
+    },
+    {
+      "id": "LN03",
+      "name": "先摆常识",
+      "file": "LN03-先摆常识.md",
+      "use": "局部表达",
+      "card_sha256": "0ae4f936ccc68188a061f27e9aa8493e3d04b67b040c3dd4dc93958fe8bf99c0"
+    },
+    {
+      "id": "LN04",
+      "name": "意外优先",
+      "file": "LN04-意外优先.md",
+      "use": "局部表达",
+      "card_sha256": "669823803cb1a0fa1f478186da7d9c2ce6ff9ed498b7f2626554ece232e01eaf"
+    },
+    {
+      "id": "LN05",
+      "name": "喜好入口",
+      "file": "LN05-喜好入口.md",
+      "use": "局部表达",
+      "card_sha256": "d2e464b91a8327a7e9375688dee39ef4f91302b6502b2c97867d37d0b12d5e9f"
+    },
+    {
+      "id": "LN06",
+      "name": "困境层层展开",
+      "file": "LN06-困境层层展开.md",
+      "use": "整篇组织",
+      "card_sha256": "b37fc15c4ee76d3a7b63e8c0b65fbcf0ab6aaa5f7edebabb75f97740d3272208"
+    },
+    {
+      "id": "LN07",
+      "name": "情绪小转折",
+      "file": "LN07-情绪小转折.md",
+      "use": "整篇组织",
+      "card_sha256": "c98f171888c79df6b925b1f1ad45f27b8bb209e855a07d3835c5c54bdc3822a5"
+    },
+    {
+      "id": "LN08",
+      "name": "目标转向",
+      "file": "LN08-目标转向.md",
+      "use": "整篇组织",
+      "card_sha256": "81706468fd689f83defdae8570dafbfaf3f43b6b984c4f073fe27a4ca790d1b2"
+    },
+    {
+      "id": "LN09",
+      "name": "大问题落到一个人",
+      "file": "LN09-大问题落到一个人.md",
+      "use": "局部表达",
+      "card_sha256": "48851e58c5d8461cd86d4e99c12207a9b2c6b793edf2020d1408bf700f0d415a"
+    },
+    {
+      "id": "LN10",
+      "name": "小事连到大系统",
+      "file": "LN10-小事连到大系统.md",
+      "use": "局部表达",
+      "card_sha256": "335fe9f7a6bd86185875bd7b122d1fd4431f44c6e689727eb8538d6ad95dbd29"
+    },
+    {
+      "id": "LN11",
+      "name": "金手指反复验证",
+      "file": "LN11-金手指反复验证.md",
+      "use": "局部表达",
+      "card_sha256": "afb7eedd442d964f407c6644db5a3f9fa4656286da290699c5a6bb58438286e1"
+    },
+    {
+      "id": "LN14",
+      "name": "身份瞬间拉近",
+      "file": "LN14-身份瞬间拉近.md",
+      "use": "局部表达",
+      "card_sha256": "d8fb8ebd95d2062391fd8ff031d95ca5867b9224dc3d64fc0a4ddab2f1139add"
+    },
+    {
+      "id": "LN15",
+      "name": "最后揭晓关系",
+      "file": "LN15-最后揭晓关系.md",
+      "use": "整篇组织",
+      "card_sha256": "cf3fede53b9a39304559c0bdf8e3226fd8dcfa4c243481497dc73930de6ebc5e"
+    },
+    {
+      "id": "LN16",
+      "name": "共同体",
+      "file": "LN16-共同体.md",
+      "use": "局部表达",
+      "card_sha256": "47ca370907198853cbbdf6d24511782922f85d6a63e3fe00494e01f5a272f854"
+    },
+    {
+      "id": "LN17",
+      "name": "缺憾到改善",
+      "file": "LN17-缺憾到改善.md",
+      "use": "整篇组织",
+      "card_sha256": "bf9a2b790401423f91fd12095900681335851fa4584dee495a722c72fb09db89"
+    },
+    {
+      "id": "LN23",
+      "name": "探照灯",
+      "file": "LN23-探照灯.md",
+      "use": "局部表达",
+      "card_sha256": "0c84ce426165192e9eb9d226490911c838886aeb5617d85da071b89d13741b08"
+    },
+    {
+      "id": "LN24",
+      "name": "全景与特写",
+      "file": "LN24-全景与特写.md",
+      "use": "局部表达",
+      "card_sha256": "49d6733beaf3039b56f0d90cbbc8decc7ac32be04eb00a6af26e9692249858a8"
+    },
+    {
+      "id": "LN25",
+      "name": "相似画面组接",
+      "file": "LN25-相似画面组接.md",
+      "use": "局部表达",
+      "card_sha256": "f78af8b885bf24e6ab69707772280f162e46dc245829ad70349b307cf6169f20"
+    },
+    {
+      "id": "LX01",
+      "name": "反常任务",
+      "file": "LX01-反常任务.md",
+      "use": "局部表达",
+      "card_sha256": "86a7a84990e11b19b5687df09013afeb68d997e39c22acfc41c2cac6cf1309f2"
+    },
+    {
+      "id": "LX02",
+      "name": "特长破局",
+      "file": "LX02-特长破局.md",
+      "use": "局部表达",
+      "card_sha256": "34859da4bf760d5b658254f5be21d6d4f05f69bdcb7cf6aa5e77311dda12a950"
+    },
+    {
+      "id": "LX03",
+      "name": "人物混搭",
+      "file": "LX03-人物混搭.md",
+      "use": "局部表达",
+      "card_sha256": "4400ff1c004188d47bdc266f80e0ddde5013f0d3ad52547ec579aa0e9dd95c18"
+    },
+    {
+      "id": "LX04",
+      "name": "让关系照出人物",
+      "file": "LX04-让关系照出人物.md",
+      "use": "局部表达",
+      "card_sha256": "653ba3118650b42522c2d9f3b5da4d45ab0acdb4be6d56e47619c1041d4c25b3"
+    },
+    {
+      "id": "LX05",
+      "name": "三幕式",
+      "file": "LX05-三幕式.md",
+      "use": "整篇组织",
+      "card_sha256": "1b9fcfa70ef6a52716f671fdf26eacd77f86fe63ed0a9d5763e0733d9cb9a69f"
+    },
+    {
+      "id": "LX06",
+      "name": "因果接力",
+      "file": "LX06-因果接力.md",
+      "use": "整篇组织",
+      "card_sha256": "379d76ee9e2fc6eef22380538159c8be4a32bfece8d0e5b737f7ff5268d4bed9"
+    },
+    {
+      "id": "LX07",
+      "name": "性格推动选择",
+      "file": "LX07-性格推动选择.md",
+      "use": "整篇组织",
+      "card_sha256": "b9c934791c02c3d4ba016335b5f0cf097848fa705d68f66694bd5625b852ade5"
+    },
+    {
+      "id": "LX08",
+      "name": "异路破局",
+      "file": "LX08-异路破局.md",
+      "use": "局部表达",
+      "card_sha256": "e2e214198defe352285f4a5414308a03ecf1778877fe96041f42822756ff407c"
+    },
+    {
+      "id": "LX09",
+      "name": "关系反转",
+      "file": "LX09-关系反转.md",
+      "use": "局部表达",
+      "card_sha256": "260b39e0b3b68fdc0943512a893612c26512e3790f8e5491e27088110822ee02"
+    },
+    {
+      "id": "LX10",
+      "name": "前提翻转",
+      "file": "LX10-前提翻转.md",
+      "use": "整篇组织",
+      "card_sha256": "64829b70f3d8573a5a5da2703d06301855023522d369de87bf232062e0622c74"
+    },
+    {
+      "id": "LX11",
+      "name": "让人关心处境",
+      "file": "LX11-让人关心处境.md",
+      "use": "局部表达",
+      "card_sha256": "94f4792f5491c86ee2405f39916a9252a7587ff735ccdb307a1f99d3a90f481f"
+    },
+    {
+      "id": "LX12",
+      "name": "高一厘米",
+      "file": "LX12-高一厘米.md",
+      "use": "局部表达",
+      "card_sha256": "ecf17ce5229bf64e2333c1c82b1227a2b68d45bc17b9f574b482f46920c301b6"
+    },
+    {
+      "id": "LX13",
+      "name": "一个目标，多面受阻",
+      "file": "LX13-一个目标，多面受阻.md",
+      "use": "局部表达",
+      "card_sha256": "e43c2c509e49b0de3b7fe60b91543a19577efb0651ba1af9dce44cdac5947717"
+    },
+    {
+      "id": "LX14",
+      "name": "多回合变招",
+      "file": "LX14-多回合变招.md",
+      "use": "局部表达",
+      "card_sha256": "b962cfe3ac498f92c6a3d7362b43aa0fa40846008b20df46ccba8f0396778441"
+    },
+    {
+      "id": "LX15",
+      "name": "行动带情绪，事情过后留一拍",
+      "file": "LX15-行动带情绪，事情过后留一拍.md",
+      "use": "局部表达",
+      "card_sha256": "4812a23023b568e85c3872956c6df9c30b21d3cf43e35eb3d3529f102efe0b33"
+    },
+    {
+      "id": "LX16",
+      "name": "话只说一半",
+      "file": "LX16-话只说一半.md",
+      "use": "局部表达",
+      "card_sha256": "04afae338f911fc08be50c2e58abd0e7d4f196b5957707e44dce63c4e028e38b"
+    },
+    {
+      "id": "LX17",
+      "name": "借一件东西说心事",
+      "file": "LX17-借一件东西说心事.md",
+      "use": "局部表达",
+      "card_sha256": "1317ae34020b56b3db5f53506e8ec39ee0567dc5f9993abbdff24e5596686f27"
+    },
+    {
+      "id": "LX18",
+      "name": "夹带信息",
+      "file": "LX18-夹带信息.md",
+      "use": "局部表达",
+      "card_sha256": "b2fcaf417cc22197d8da4cc62f0cb2a091cb474a201125a67669c5210790f6f9"
+    },
+    {
+      "id": "LX19",
+      "name": "对话显关系",
+      "file": "LX19-对话显关系.md",
+      "use": "局部表达",
+      "card_sha256": "b2545aad5f43aa719895cdce032511f967ecfdd9ec7ad0aab2408c642c3d1609"
+    },
+    {
+      "id": "LX20",
+      "name": "类比金句",
+      "file": "LX20-类比金句.md",
+      "use": "局部表达",
+      "card_sha256": "5adfeaeb0b2d0db9149a08e5b091c6d365017fd68e60354c1e739a5da0324da5"
+    },
+    {
+      "id": "LX21",
+      "name": "问题接力",
+      "file": "LX21-问题接力.md",
+      "use": "整篇组织",
+      "card_sha256": "27f290da0c38bbd01c885f262ced3af24805bd8e15752fb6786757c266859e8b"
+    },
+    {
+      "id": "LX22",
+      "name": "悬崖切点",
+      "file": "LX22-悬崖切点.md",
+      "use": "局部表达",
+      "card_sha256": "cc441996aa100438d233e9ca4424453cf0b598221b8ec44a746b4d6615f9ab90"
+    },
+    {
+      "id": "LX23",
+      "name": "拼图揭谜",
+      "file": "LX23-拼图揭谜.md",
+      "use": "整篇组织",
+      "card_sha256": "eeccbeb6148249e1e0978f0f69d3dd84f3e3ca1ff2bdcbe6d010f54f17364d44"
+    },
+    {
+      "id": "LX24",
+      "name": "两难见人",
+      "file": "LX24-两难见人.md",
+      "use": "整篇组织",
+      "card_sha256": "14610cec05c24d2f0f1e5c0d9554f6079bfef843a76e64fa0a139316a756f36a"
+    },
+    {
+      "id": "LX25",
+      "name": "不完美的人",
+      "file": "LX25-不完美的人.md",
+      "use": "局部表达",
+      "card_sha256": "5c908227d28adfced0fdb0681a921fe227173bc6949183610610ab56a81a3d12"
+    }
+  ]
+}

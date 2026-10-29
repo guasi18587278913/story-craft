@@ -1,0 +1,1127 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-10-26",
+  "source_tool": "gbrain_sc_media.get_page",
+  "entry_count": 54,
+  "numbered_methods": 47,
+  "count_rule": "非空白字符数，含标点及来源定位文字",
+  "upstream_hash_note": "content_hash 是知识库页指纹；section_sha256 是返回节正文的本地SHA-256，二者不能混用。",
+  "entries": [
+    {
+      "key": "story-all",
+      "stage": "story",
+      "page": "concepts/storytelling",
+      "section": "all",
+      "source_section": "",
+      "request": "concepts/storytelling",
+      "heading": "叙事推进",
+      "content_hash": "1aba22c8349d225afd1e3d5ea9ddfc12d053599abf57c73bf7c47b2fd0da6f63",
+      "read_at": "2026-10-26T06:25:32.683Z",
+      "char_count": 473,
+      "text_length": 511,
+      "section_sha256": "50602c03c4bbc00a9e4cf8a8e3083762754c7a881561b4f2ad06b21839ff1b9a",
+      "file": "references/story-methods/00-storytelling.md",
+      "source_refs": [
+        "concepts/structure_quick",
+        "concepts/body_expression_quick",
+        "concepts/opening_hook_quick",
+        "concepts/ending_quick"
+      ]
+    },
+    {
+      "key": "structure-23",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "23",
+      "source_section": "23",
+      "request": "concepts/structure#23",
+      "heading": "23. 困境转机：我是怎么熬出来的",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.690Z",
+      "char_count": 716,
+      "text_length": 738,
+      "section_sha256": "d5b6d5acf5cf4349f6155b706dcb49ae5f9dd8a348ecae0c4826b85f20898780",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/community/xiaoe-b3cdda957c5286c9",
+        "sources/community/xiaoe-9d3f33af19c1ce22",
+        "sources/course/xuehui-343a9b2938264967",
+        "sources/community/zsxq-55521151558281524"
+      ],
+      "source_section_sha256": "cd1611bc1bc2a510056ec2b837d9cabe103de68987a49bfc34cf39224062e9cf",
+      "anonymization": [
+        {
+          "start": 677,
+          "end": 679,
+          "original_sha256": "d077d0b18e19cd2e9d28709f29e2623b0216733205deae3544a91e35a2a66ca4",
+          "replacement": "[内容平台]"
+        }
+      ]
+    },
+    {
+      "key": "structure-24",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "24",
+      "source_section": "24",
+      "request": "concepts/structure#24",
+      "heading": "24. 先卑微，再风光，最后输一回",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.690Z",
+      "char_count": 776,
+      "text_length": 798,
+      "section_sha256": "07a872feb90b801b9e0ef83fe6e6d3a6e2d138f929923fd05a352f0269363ebb",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/community/zsxq-22258822885284281"
+      ]
+    },
+    {
+      "key": "structure-25",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "25",
+      "source_section": "25",
+      "request": "concepts/structure#25",
+      "heading": "25. 重走成功路（含人物访谈）",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.690Z",
+      "char_count": 395,
+      "text_length": 417,
+      "section_sha256": "d5299185f0ddd3ac852fd37a33b0f04d7bc49fe180c621b5d2079619678a8f8f",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/course/xuehui-6539e7394f8c513d"
+      ]
+    },
+    {
+      "key": "structure-26",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "26",
+      "source_section": "26",
+      "request": "concepts/structure#26",
+      "heading": "26. 成功案例：我帮别人成了事",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 429,
+      "text_length": 447,
+      "section_sha256": "c60b541e14477769643af9c4c3968b9a81fd52689a40a04c7c812eca54f2e3d2",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/course/xuehui-80ce94f4ee722240",
+        "sources/community/zsxq-82258281525851852"
+      ]
+    },
+    {
+      "key": "structure-27",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "27",
+      "source_section": "27",
+      "request": "concepts/structure#27",
+      "heading": "27. 讲别人怎么做成的（第三人称）",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 716,
+      "text_length": 739,
+      "section_sha256": "82e88f991f2f505b4064c0a4274dd7305fe22f2028222b72f7f9bae7d40c32bc",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/community/xiaoe-c71158f081753553",
+        "sources/community/zsxq-45548541528888418",
+        "sources/community/zsxq-45548541812882448"
+      ]
+    },
+    {
+      "key": "structure-28",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "28",
+      "source_section": "28",
+      "request": "concepts/structure#28",
+      "heading": "28. 平凡英雄：硬刚一件不公的小事",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 657,
+      "text_length": 679,
+      "section_sha256": "709044c11b8371e6f0cfeb334fae63112cef2741224c064e462715e34779962a",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/course/xuehui-fdd4298016e50974",
+        "sources/community/xiaoe-c9912dd3a773c70c",
+        "sources/course/xuehui-5559ce2fe1cc0e89",
+        "sources/community/zsxq-14422821524521852"
+      ]
+    },
+    {
+      "key": "structure-29",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "29",
+      "source_section": "29",
+      "request": "concepts/structure#29",
+      "heading": "29. 苦难经历：说出自己的缺陷",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 435,
+      "text_length": 455,
+      "section_sha256": "854c26e2390b19dead4af131b9863170830e5cd65c02f8daec45a645a6db2777",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/course/xuehui-6400927bde7edf6d"
+      ],
+      "source_section_sha256": "3ddea01ed4ce1deee2bb86913762609453f2d961711bfd0aceda35152662166a",
+      "anonymization": [
+        {
+          "start": 120,
+          "end": 123,
+          "original_sha256": "d26c6a08a591011a3bf644f19678e44e102f8303afe1c15447109b24dc70d58f",
+          "replacement": "[图文平台]"
+        }
+      ]
+    },
+    {
+      "key": "structure-30",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "30",
+      "source_section": "30",
+      "request": "concepts/structure#30",
+      "heading": "30. 折腾经历：踩坑、找原因、吃教训",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 741,
+      "text_length": 762,
+      "section_sha256": "13e5d1a28aa9ce155444c74f1d059b540f4537b8c7d82511da4373aef65d1388",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/community/xiaoe-145b593c1548cfa5",
+        "sources/community/xiaoe-858951dead95fb4c",
+        "sources/community/zsxq-45548852452211828",
+        "sources/community/xiaoe-c9af4a5a933df08f",
+        "sources/community/zsxq-55521152545151254"
+      ]
+    },
+    {
+      "key": "structure-31",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "31",
+      "source_section": "31",
+      "request": "concepts/structure#31",
+      "heading": "31. 帮助弱者（含后记）",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 486,
+      "text_length": 505,
+      "section_sha256": "9ca621f968e558c0d33cb5de1037ecdee5d4d99daee5d891707d9b6ca8c94f84",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/course/xuehui-f0eb060a2d47d5a3",
+        "sources/course/xuehui-a6a7e82d62229488",
+        "sources/course/xuehui-0059f6b07f0dd9d4"
+      ]
+    },
+    {
+      "key": "structure-32",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "32",
+      "source_section": "32",
+      "request": "concepts/structure#32",
+      "heading": "32. 讲身边一个人：后知后觉的爱",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 685,
+      "text_length": 706,
+      "section_sha256": "6f6c907b9a3563319546ea0fbd32efa9d35f21a6c2eb0be37b89593807b9255f",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/course/xuehui-eded734e20c9dadb",
+        "sources/community/xiaoe-477721f4e823bd06",
+        "sources/community/xiaoe-bf3c0f0766c127b2",
+        "sources/community/xiaoe-aaefa490f45fa51c",
+        "sources/community/zsxq-22258822885284281"
+      ]
+    },
+    {
+      "key": "structure-33",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "33",
+      "source_section": "33",
+      "request": "concepts/structure#33",
+      "heading": "33. 关系里的一件小事",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 626,
+      "text_length": 647,
+      "section_sha256": "ed721cba0acc6b6bc4cc526063807585853764c29f92b1948b45404a5154b429",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/community/xiaoe-28efdecf1cac3913",
+        "sources/community/xiaoe-b65e6817745cd0af",
+        "sources/community/xiaoe-61c8eefe29830b4d",
+        "sources/community/xiaoe-021815206dd8f03d",
+        "sources/community/xiaoe-65892a01d3c19501"
+      ]
+    },
+    {
+      "key": "structure-34",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "34",
+      "source_section": "34",
+      "request": "concepts/structure#34",
+      "heading": "34. 讲一次人生选择",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 542,
+      "text_length": 564,
+      "section_sha256": "1bcb8066874ea6ec3fe6bbeaf8d62394cafdfda5ff03265ba5359e0686e8c4ef",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/community/xiaoe-0d88cff5b06c841b",
+        "sources/community/xiaoe-63b1fa848b0a5115",
+        "sources/community/xiaoe-b9175dab4e16b65c"
+      ]
+    },
+    {
+      "key": "structure-35",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "35",
+      "source_section": "35",
+      "request": "concepts/structure#35",
+      "heading": "35. 过程记录：起因、经过、结果",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 650,
+      "text_length": 671,
+      "section_sha256": "a8f18e3e99d67afa2524b06a361b64a7bfa80fd512404c141f82b0a9f857a66d",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/course/xuehui-321868235e1dfe74",
+        "sources/course/xuehui-2a514a83cbdf64ba",
+        "sources/community/xiaoe-edf6c1eff3d81cc2",
+        "sources/community/xiaoe-a1d651f7a09674be"
+      ]
+    },
+    {
+      "key": "structure-46",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "46",
+      "source_section": "46",
+      "request": "concepts/structure#46",
+      "heading": "46. 用一个故事带出产品",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 740,
+      "text_length": 763,
+      "section_sha256": "3d294e48d089ceaba331dac99f9ee3c4ad701ab907f4c7a2b55eb00ca2354382",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/community/zsxq-45548552248815218",
+        "sources/community/zsxq-14425441125424122",
+        "sources/community/zsxq-22258818415425851",
+        "sources/community/xiaoe-2ffcb636b2e281c1"
+      ]
+    },
+    {
+      "key": "structure-通用禁忌",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "通用禁忌",
+      "source_section": "通用禁忌",
+      "request": "concepts/structure#通用禁忌",
+      "heading": "通用禁忌",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 612,
+      "text_length": 635,
+      "section_sha256": "0f42ca6662c725aeb5eb7aa6e56e22cc968eddf6bd7cc49833973cc43102ce99",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "methods/method_principle/method-1305d25b018ea632",
+        "sources/course/xuehui-6090812ba5a76368",
+        "sources/course/xuehui-cc1a5b3676a0a427",
+        "sources/community/xiaoe-f8b3a4d9c29e7da5",
+        "sources/community/xiaoe-f33a7f303f7270d0"
+      ]
+    },
+    {
+      "key": "structure-缺口",
+      "stage": "structure",
+      "page": "concepts/structure",
+      "section": "缺口",
+      "source_section": "缺口",
+      "request": "concepts/structure#缺口",
+      "heading": "缺口",
+      "content_hash": "b3edd0e29eb074d48a9bac4c4b78e63aced6b9fe7dadd5455cff16cdb86712dc",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 1245,
+      "text_length": 1341,
+      "section_sha256": "e03edf4ba233409840e214af3787e8db8f175a99172f060ade411aeb057a966b",
+      "file": "references/story-methods/01-structure.md",
+      "source_refs": [
+        "sources/community/zsxq-45548541528888418"
+      ]
+    },
+    {
+      "key": "opening-29",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "29",
+      "source_section": "29",
+      "request": "concepts/opening_hook#29",
+      "heading": "29. 自曝短处、先认错",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 428,
+      "text_length": 457,
+      "section_sha256": "fc3c6f326f2065dba9936bb81bf256b0fd0d2a6cf1230bfd4757e7a5d7f62301",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/community/xiaoe-789513bcd2965e84",
+        "sources/community/zsxq-45548855415122258"
+      ]
+    },
+    {
+      "key": "opening-30",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "30",
+      "source_section": "30",
+      "request": "concepts/opening_hook#30",
+      "heading": "30. 开局就惨",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 461,
+      "text_length": 491,
+      "section_sha256": "30084f21ac6fb85b7a348fbbae680faa0186c0401cc80c55c27e4837108490d7",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/community/xiaoe-9dc386081673f502",
+        "sources/community/xiaoe-b9175dab4e16b65c"
+      ]
+    },
+    {
+      "key": "opening-31",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "31",
+      "source_section": "31",
+      "request": "concepts/opening_hook#31",
+      "heading": "31. 从一个场景或一句对话切进去",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 466,
+      "text_length": 494,
+      "section_sha256": "b794971130720186ad1ee039e95a2e6b587c059b1a8385c1490dc9e9d41a7ae7",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/community/xiaoe-5f5aa9cd75626e1a",
+        "sources/community/zsxq-45548821182512488"
+      ]
+    },
+    {
+      "key": "opening-32",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "32",
+      "source_section": "32",
+      "request": "concepts/opening_hook#32",
+      "heading": "32. 换个人来讲",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 454,
+      "text_length": 482,
+      "section_sha256": "f5007cfc57fda9fd078bf60b8776f0bc993d5b044825a671428ef9f6e4c7e961",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/community/xiaoe-8276ae90f641095b",
+        "sources/community/zsxq-22258841545551241"
+      ]
+    },
+    {
+      "key": "opening-33",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "33",
+      "source_section": "33",
+      "request": "concepts/opening_hook#33",
+      "heading": "33. 先立 flag，等着打脸",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 293,
+      "text_length": 314,
+      "section_sha256": "93c44e5c62b57ca68d2ee2e3bcf593551034e6a66d08f3cef6f42e5ff61db43d",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/community/xiaoe-c06a30a32616d5f9"
+      ]
+    },
+    {
+      "key": "opening-2",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "2",
+      "source_section": "2",
+      "request": "concepts/opening_hook#2",
+      "heading": "2. 前后对比、高低反差",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 549,
+      "text_length": 582,
+      "section_sha256": "ee6d6007242d4a764cc543d99c0929fe61a00286010e8a7ed1ba5806a72f7b70",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "cases/community_template/xiaoe-b34ee2216fe54cf3",
+        "sources/course/xuehui-4448c2eec08c3188",
+        "sources/community/zsxq-82255152445552252"
+      ]
+    },
+    {
+      "key": "opening-3",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "3",
+      "source_section": "3",
+      "request": "concepts/opening_hook#3",
+      "heading": "3. 不对劲的人和事",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 485,
+      "text_length": 514,
+      "section_sha256": "84f1dfc0bc63ee52a0c608805af172c153edb5a94fc9a2a1efbc09a28052130a",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/course/xuehui-a6a7e82d62229488",
+        "sources/course/xuehui-23dec172e64bd7e6"
+      ]
+    },
+    {
+      "key": "opening-4",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "4",
+      "source_section": "4",
+      "request": "concepts/opening_hook#4",
+      "heading": "4. 出人意料的结果",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 450,
+      "text_length": 479,
+      "section_sha256": "2025ff75887953be16c14046a4ab06ce950638effe9cca5cd07f29bbafa468c0",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/community/zsxq-14422821524521852",
+        "sources/community/zsxq-45544148248511448"
+      ]
+    },
+    {
+      "key": "opening-9",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "9",
+      "source_section": "9",
+      "request": "concepts/opening_hook#9",
+      "heading": "9. 悬念：只说一半",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 500,
+      "text_length": 534,
+      "section_sha256": "c13588b402b5430b36d979f8c8eb8d3f32b7f7ae3783356552c3fccd6102a5d2",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/community/xiaoe-879d6cbfec43c00b",
+        "sources/community/xiaoe-70bd45d19aa8516f",
+        "sources/community/zsxq-22258822885284281"
+      ]
+    },
+    {
+      "key": "opening-22",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "22",
+      "source_section": "22",
+      "request": "concepts/opening_hook#22",
+      "heading": "22. 先亮结果",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 438,
+      "text_length": 468,
+      "section_sha256": "40a2baef8f0bcf4f5c0f64c69dc7642c22a69ef43d4c178c0062230e379827ea",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/community/zsxq-82258824541251542",
+        "sources/community/zsxq-45548581245488218"
+      ]
+    },
+    {
+      "key": "opening-通用禁忌",
+      "stage": "opening",
+      "page": "concepts/opening_hook",
+      "section": "通用禁忌",
+      "source_section": "通用禁忌",
+      "request": "concepts/opening_hook#通用禁忌",
+      "heading": "通用禁忌",
+      "content_hash": "7ca4e6653cc37ce4262592ff492df0a722473ca038218545aba1aa3171d02096",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 949,
+      "text_length": 997,
+      "section_sha256": "d61a21a2f5bb9ecba0420a1f9cc0c7d1135b1ee0ce438fd272962b1aa7079354",
+      "file": "references/story-methods/02-opening.md",
+      "source_refs": [
+        "sources/course/xuehui-cd59dfdcd5f8dcdc",
+        "sources/community/zsxq-45548558181445418",
+        "sources/community/zsxq-45548581454845588",
+        "sources/course/xuehui-7fbbea98702942af",
+        "sources/course/xuehui-0dfde536727cbd70"
+      ],
+      "source_section_sha256": "0031191524375a47cff75299154137b717b272236c3cf6308295b304e44e1571",
+      "anonymization": [
+        {
+          "start": 327,
+          "end": 329,
+          "original_sha256": "d077d0b18e19cd2e9d28709f29e2623b0216733205deae3544a91e35a2a66ca4",
+          "replacement": "[内容平台]"
+        },
+        {
+          "start": 483,
+          "end": 485,
+          "original_sha256": "81b430b69643518018b5c10df96d0e1172cfdf1a034fbb3e6f104532a49b9030",
+          "replacement": "[聊天工具]"
+        }
+      ]
+    },
+    {
+      "key": "body-1",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "1",
+      "source_section": "1",
+      "request": "concepts/body_expression#1",
+      "heading": "1. 术语、圈内词换成对方听得懂的话",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 465,
+      "text_length": 485,
+      "section_sha256": "8b8d4e13a153e3d649a85b89cff2862502408717dd669614779694d8fed4efed",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/community/xiaoe-e627bec76fa8bb27",
+        "sources/community/xiaoe-95b32bea27d81bbc"
+      ]
+    },
+    {
+      "key": "body-8",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "8",
+      "source_section": "8",
+      "request": "concepts/body_expression#8",
+      "heading": "8. 陌生的东西先说清是什么",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 619,
+      "text_length": 649,
+      "section_sha256": "4432f83a6294db561cc3e615244506d75001c1e2eca58cd38602c85565c560b5",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/course/xuehui-126b1246378c31b5",
+        "cases/community_template/xiaoe-0421397bff93d74a",
+        "sources/community/zsxq-45548558215825588"
+      ]
+    },
+    {
+      "key": "body-16",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "16",
+      "source_section": "16",
+      "request": "concepts/body_expression#16",
+      "heading": "16. 原话直接放进来",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 404,
+      "text_length": 426,
+      "section_sha256": "f5428be3e53b420e79cfddff59ada55af24bb5deeab02b9853c0ad7d8a203816",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/community/zsxq-82255152445552252",
+        "sources/community/xiaoe-65892a01d3c19501"
+      ]
+    },
+    {
+      "key": "body-19",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "19",
+      "source_section": "19",
+      "request": "concepts/body_expression#19",
+      "heading": "19. 不编，分清事实、推测和转述",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 519,
+      "text_length": 548,
+      "section_sha256": "7c12add5f72c0cd2b5d1514c131b3bd6098b6664ce0c65a7e5822bf71ff2bee8",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "methods/style_guide/style-guide-force-with-facts",
+        "cases/script_exemplar/exemplar-commentary-130"
+      ]
+    },
+    {
+      "key": "body-21",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "21",
+      "source_section": "21",
+      "request": "concepts/body_expression#21",
+      "heading": "21. 感受和评价换成事实",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 486,
+      "text_length": 514,
+      "section_sha256": "2d1a5811a3992d97701d8f2cc6c4690496670b062796fab2ecae4b64c721c661",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/community/zsxq-22258822885284281",
+        "sources/community/zsxq-45548558181445418"
+      ]
+    },
+    {
+      "key": "body-22",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "22",
+      "source_section": "22",
+      "request": "concepts/body_expression#22",
+      "heading": "22. 抽象词换成画面",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 471,
+      "text_length": 501,
+      "section_sha256": "0939c6cccff3e9315a129422ed06b8a45a99e2eed9c19f264da8d64282832d3c",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/course/xuehui-3fdea454e16a024e",
+        "sources/community/zsxq-55521152545151254"
+      ]
+    },
+    {
+      "key": "body-26",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "26",
+      "source_section": "26",
+      "request": "concepts/body_expression#26",
+      "heading": "26. 情绪先于道理",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 384,
+      "text_length": 402,
+      "section_sha256": "f06b4d85670e8fe98185d9021256c8723117078334871a9e4fec9d30436c314d",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "cases/community_template/xiaoe-acff5d370f857095",
+        "sources/book/lidan-77a938bd6957e251"
+      ]
+    },
+    {
+      "key": "body-27",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "27",
+      "source_section": "27",
+      "request": "concepts/body_expression#27",
+      "heading": "27. 情绪有起有落",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 382,
+      "text_length": 406,
+      "section_sha256": "42159ca7ac7dec6a1d64f50adab4bbff5e3406f47bfb1a696ff66056c37a2e5f",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/community/zsxq-45548581245488218",
+        "cases/script_exemplar/exemplar-story-071"
+      ]
+    },
+    {
+      "key": "body-28",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "28",
+      "source_section": "28",
+      "request": "concepts/body_expression#28",
+      "heading": "28. 情绪落到物件和动作上，关键处留白",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 500,
+      "text_length": 529,
+      "section_sha256": "d554601402ceb1603a01f66efe37d6ffccb77db21160259fa8dcb65a21d932b3",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/community/zsxq-22258822885284281",
+        "sources/community/xiaoe-bf3c0f0766c127b2"
+      ]
+    },
+    {
+      "key": "body-33",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "33",
+      "source_section": "33",
+      "request": "concepts/body_expression#33",
+      "heading": "33. 一层比一层深",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 389,
+      "text_length": 415,
+      "section_sha256": "0b99d657d41b8a3e58ddc8135c4f328207b28ce275caf3c18e77d82c9d60e459",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/community/xiaoe-d6ed16cd0fafa30a",
+        "sources/community/zsxq-22258822822188411"
+      ]
+    },
+    {
+      "key": "body-34",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "34",
+      "source_section": "34",
+      "request": "concepts/body_expression#34",
+      "heading": "34. 先顺着想，再翻过来",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 528,
+      "text_length": 556,
+      "section_sha256": "302bba5437bfe0540f78589a0c67bf78992e8448c410ca9a02d1b8bb4b6807c4",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/community/zsxq-22255158555485441",
+        "sources/community/zsxq-55522822524542824"
+      ]
+    },
+    {
+      "key": "body-38",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "38",
+      "source_section": "38",
+      "request": "concepts/body_expression#38",
+      "heading": "38. 打比方：只用一听就懂的",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 612,
+      "text_length": 630,
+      "section_sha256": "68ef614f5474fbb5be4d4bb18d26e4aa1aeea294f5726079630116151eefe5c1",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/course/xuehui-3fdea454e16a024e",
+        "cases/community_template/xiaoe-14b56c1abcb8e2ee",
+        "sources/community/zsxq-45544281121281558"
+      ]
+    },
+    {
+      "key": "body-41",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "41",
+      "source_section": "41",
+      "request": "concepts/body_expression#41",
+      "heading": "41. 说具体的人和事",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 496,
+      "text_length": 524,
+      "section_sha256": "565918e928b8bb3151204d9fa1dae5193f6baf8a12c20091bb69f65e46e1a6f9",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "methods/method_principle/method-4f65f66be4724997",
+        "sources/community/zsxq-45544145848851258",
+        "sources/community/zsxq-45548855415122258"
+      ]
+    },
+    {
+      "key": "body-49",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "49",
+      "source_section": "49",
+      "request": "concepts/body_expression#49",
+      "heading": "49. 让别人开口：对话、角色、换视角",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 457,
+      "text_length": 482,
+      "section_sha256": "f803ba49954267772b6b1c3a3bbd2cb34873a21f66bf3f05fcea7535be66a5a8",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "cases/script_exemplar/exemplar-process-047",
+        "sources/community/zsxq-22258841545551241"
+      ]
+    },
+    {
+      "key": "body-50",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "50",
+      "source_section": "50",
+      "request": "concepts/body_expression#50",
+      "heading": "50. 说出心里的念头",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 415,
+      "text_length": 439,
+      "section_sha256": "9c51f7ea3aa5628b3c26800a2a867c3122599471b43cf77a15ea52f3ab250a54",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "cases/community_template/xiaoe-ef69a813423fb606",
+        "cases/community_template/xiaoe-ae9851031f280b24"
+      ]
+    },
+    {
+      "key": "body-不照学",
+      "stage": "body",
+      "page": "concepts/body_expression",
+      "section": "不照学",
+      "source_section": "不照学",
+      "request": "concepts/body_expression#不照学",
+      "heading": "库里有、但不照学的",
+      "content_hash": "c53d1f2ebc3e70207284ff8a921a18ebf0f127b104058ccd8a8dda9fb2e244e9",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 846,
+      "text_length": 858,
+      "section_sha256": "c9e88ea8bb729cf72502ad39408a3b41384f196de38e76534d447565e24993ed",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": [
+        "sources/community/xiaoe-763296876045e505",
+        "sources/community/zsxq-22255414441555441",
+        "sources/course/xuehui-687c08867eabfc31",
+        "sources/book/lidan-77a938bd6957e251",
+        "cases/community_template/xiaoe-e7d28d617a6b6456",
+        "sources/course/xuehui-3ac67c9bd8728904",
+        "sources/course/xuehui-6453a94381518db0",
+        "sources/community/zsxq-55522822524542824",
+        "sources/community/xiaoe-8243045c8e0430fc",
+        "concepts/emotion"
+      ]
+    },
+    {
+      "key": "body-写完自查",
+      "stage": "body",
+      "page": "concepts/body_expression_quick",
+      "section": "写完自查",
+      "source_section": "写完自查",
+      "request": "concepts/body_expression_quick#写完自查",
+      "heading": "写完自查",
+      "content_hash": "fb787bcf840e6299c1ee30e47d0caf0e45c1455e969fc65cb6c0d8899d3e0a15",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 542,
+      "text_length": 576,
+      "section_sha256": "b769f01318e790d2b1d88ccb7425357f848d5d20d559f760778e2fef8913adcf",
+      "file": "references/story-methods/03-body.md",
+      "source_refs": []
+    },
+    {
+      "key": "ending-4",
+      "stage": "ending",
+      "page": "concepts/ending",
+      "section": "4",
+      "source_section": "4",
+      "request": "concepts/ending#4",
+      "heading": "4. 回到开头，给一个回应",
+      "content_hash": "dab2e310665a65bb75bc26cb0cd848a15994255ca65f531624f19f068fb89b78",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 559,
+      "text_length": 585,
+      "section_sha256": "b146adcec712e45186f66994863ee00210f7565b3f6036dcd852388c747649f2",
+      "file": "references/story-methods/04-ending.md",
+      "source_refs": [
+        "sources/community/zsxq-45548814185188448",
+        "sources/community/xiaoe-98f8435173479669"
+      ]
+    },
+    {
+      "key": "ending-10",
+      "stage": "ending",
+      "page": "concepts/ending",
+      "section": "10",
+      "source_section": "10",
+      "request": "concepts/ending#10",
+      "heading": "10. 交代结果，让这件事有个落点",
+      "content_hash": "dab2e310665a65bb75bc26cb0cd848a15994255ca65f531624f19f068fb89b78",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 458,
+      "text_length": 480,
+      "section_sha256": "3e73e0580dccc97b1731e988a20b3828f50980f0edd1519dcc6c28dae4e7f7cc",
+      "file": "references/story-methods/04-ending.md",
+      "source_refs": [
+        "sources/community/zsxq-45548558181445418",
+        "sources/course/xuehui-70af13cc0ae8b1fb"
+      ]
+    },
+    {
+      "key": "ending-11",
+      "stage": "ending",
+      "page": "concepts/ending",
+      "section": "11",
+      "source_section": "11",
+      "request": "concepts/ending#11",
+      "heading": "11. 最后转一下，让前面有了新意思",
+      "content_hash": "dab2e310665a65bb75bc26cb0cd848a15994255ca65f531624f19f068fb89b78",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 502,
+      "text_length": 529,
+      "section_sha256": "50c7da133dbf7377e3407f849e47f3bfea097f74d9017dd727e6da7592441e7b",
+      "file": "references/story-methods/04-ending.md",
+      "source_refs": [
+        "sources/community/zsxq-22255152852284821",
+        "sources/community/xiaoe-62d529232ab9de56"
+      ],
+      "source_section_sha256": "0cabff5a0bd45b1333e87466954b415a47881952df46ffaf8ff5590aee6ea708",
+      "anonymization": [
+        {
+          "start": 433,
+          "end": 435,
+          "original_sha256": "81b430b69643518018b5c10df96d0e1172cfdf1a034fbb3e6f104532a49b9030",
+          "replacement": "[聊天工具]"
+        },
+        {
+          "start": 451,
+          "end": 453,
+          "original_sha256": "81b430b69643518018b5c10df96d0e1172cfdf1a034fbb3e6f104532a49b9030",
+          "replacement": "[聊天工具]"
+        }
+      ]
+    },
+    {
+      "key": "ending-12",
+      "stage": "ending",
+      "page": "concepts/ending",
+      "section": "12",
+      "source_section": "12",
+      "request": "concepts/ending#12",
+      "heading": "12. 用反话或自嘲收住",
+      "content_hash": "dab2e310665a65bb75bc26cb0cd848a15994255ca65f531624f19f068fb89b78",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 430,
+      "text_length": 457,
+      "section_sha256": "6bccb0297ac3bdea9f99aa332d6ac6114a148aecb873bbf957187ae298a396d0",
+      "file": "references/story-methods/04-ending.md",
+      "source_refs": [
+        "sources/community/xiaoe-0034b08cdb0ac1c9",
+        "sources/community/xiaoe-8dd54f2ab11685e1"
+      ]
+    },
+    {
+      "key": "ending-13",
+      "stage": "ending",
+      "page": "concepts/ending",
+      "section": "13",
+      "source_section": "13",
+      "request": "concepts/ending#13",
+      "heading": "13. 正片说完，再给一个小彩蛋",
+      "content_hash": "dab2e310665a65bb75bc26cb0cd848a15994255ca65f531624f19f068fb89b78",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 448,
+      "text_length": 477,
+      "section_sha256": "b030874e43d5a7fb27f4b38630cc014dcc7485581e5efc6701dd743ada4fee70",
+      "file": "references/story-methods/04-ending.md",
+      "source_refs": [
+        "sources/community/zsxq-14425452441282552",
+        "sources/community/zsxq-82258252881412212"
+      ]
+    },
+    {
+      "key": "ending-14",
+      "stage": "ending",
+      "page": "concepts/ending",
+      "section": "14",
+      "source_section": "14",
+      "request": "concepts/ending#14",
+      "heading": "14. 留一个确实还没结束的悬念",
+      "content_hash": "dab2e310665a65bb75bc26cb0cd848a15994255ca65f531624f19f068fb89b78",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 397,
+      "text_length": 423,
+      "section_sha256": "6c8ded3a7c2619404120ea500ad8f217bebb80813237eb8b87ef74d8f3a0c1f6",
+      "file": "references/story-methods/04-ending.md",
+      "source_refs": [
+        "sources/community/zsxq-22258254481185251"
+      ]
+    },
+    {
+      "key": "ending-15",
+      "stage": "ending",
+      "page": "concepts/ending",
+      "section": "15",
+      "source_section": "15",
+      "request": "concepts/ending#15",
+      "heading": "15. 停在真实现状，允许没有答案",
+      "content_hash": "dab2e310665a65bb75bc26cb0cd848a15994255ca65f531624f19f068fb89b78",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 404,
+      "text_length": 426,
+      "section_sha256": "905d2f06e31200a96ed6b6e7101cbb14a47ee7c89129aa31b938874eb663c637",
+      "file": "references/story-methods/04-ending.md",
+      "source_refs": [
+        "sources/community/zsxq-55521152545151254",
+        "sources/community/zsxq-82255411815248422"
+      ]
+    },
+    {
+      "key": "ending-16",
+      "stage": "ending",
+      "page": "concepts/ending",
+      "section": "16",
+      "source_section": "16",
+      "request": "concepts/ending#16",
+      "heading": "16. 用人物原话、物件或旧照片收住",
+      "content_hash": "dab2e310665a65bb75bc26cb0cd848a15994255ca65f531624f19f068fb89b78",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 571,
+      "text_length": 595,
+      "section_sha256": "1fb20298a47cfba72c1c364820d67c31000e119e3a244cf61f749eb100347f67",
+      "file": "references/story-methods/04-ending.md",
+      "source_refs": [
+        "sources/community/zsxq-22258822885284281",
+        "sources/community/zsxq-55522822528422884"
+      ]
+    },
+    {
+      "key": "ending-照单全收",
+      "stage": "ending",
+      "page": "concepts/ending",
+      "section": "照单全收",
+      "source_section": "照单全收",
+      "request": "concepts/ending#照单全收",
+      "heading": "库里有、但不能照单全收的说法",
+      "content_hash": "dab2e310665a65bb75bc26cb0cd848a15994255ca65f531624f19f068fb89b78",
+      "read_at": "2026-10-26T06:25:32.691Z",
+      "char_count": 683,
+      "text_length": 702,
+      "section_sha256": "15b23244cca3f1bc9a6921d2c2f930a4acf02992bb913568e0a9590b285e3186",
+      "file": "references/story-methods/04-ending.md",
+      "source_refs": [
+        "cases/script_exemplar/exemplar-story-071",
+        "sources/community/zsxq-82258881588221852",
+        "sources/community/zsxq-55521152545151254",
+        "sources/community/zsxq-22255414441555441",
+        "sources/community/zsxq-45544221545148848"
+      ]
+    }
+  ],
+  "snapshot_files": {
+    "references/story-methods/00-storytelling.md": "bf7cbeec7057c78ce5b8bda88192d93d40910bed43ba5a723a38056b809ccdc6",
+    "references/story-methods/01-structure.md": "5c282d8ca957f9e5b1b60909b7a84724cb783755f5f31ee581ea7024adc46e41",
+    "references/story-methods/02-opening.md": "380ac79aecd39cfc1d4900d4be4f899df1b948e49529aaf9287cf38a5603fdbd",
+    "references/story-methods/03-body.md": "480d17580a3bd82bbdb2d299ee05ea99b915ddc040651e6a22e37da35a88385f",
+    "references/story-methods/04-ending.md": "6d570f68e036ca5b034df79390414e902ecd8bae3abd62e5f4a10c26f856aeef"
+  }
+}
