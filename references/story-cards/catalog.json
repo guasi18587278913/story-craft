@@ -54,7 +54,7 @@
       "name": "讲别人怎么做成的",
       "file": "27-讲别人怎么做成的.md",
       "status": "只有骨架｜试写：未试写｜用户认可：未确认",
-      "card_sha256": "914523455709a815adff72fa1f2480eb179aae557dc149f474a78be72edfc6bf"
+      "card_sha256": "ffa94a35e6c7e74ae5e432d7f55d49cf698cabd3083c9729f2fa2645ecebfc9e"
     },
     {
       "id": "28",
@@ -128,6 +128,13 @@
     }
   ],
   "writing": [
+    {
+      "id": "KB01",
+      "name": "做法说到能照做",
+      "file": "KB01-做法说到能照做.md",
+      "use": "局部表达",
+      "card_sha256": "3ac96a1c5d8112806e72bdcf369861e6ed860135c391480a2f1cddf1a78764bf"
+    },
     {
       "id": "LN01",
       "name": "击碎标签",

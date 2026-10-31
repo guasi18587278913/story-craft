@@ -3,7 +3,7 @@
   "source": "installed story-craft skill snapshot",
   "destination_repository": "guasi18587278913/story-craft",
   "intended_visibility": "private",
-  "source_file_count": 103,
+  "source_file_count": 106,
   "byte_identical_source_files": true,
   "excluded": [
     "external credentials and local configuration",
@@ -20,13 +20,13 @@
   "source_files": [
     {
       "path": "SKILL.md",
-      "sha256": "973ae1039e4ffbbb13d464a0feb71b2dea1ec95d75dbc36ae5c94b3ccdbb6f58",
-      "bytes": 14380
+      "sha256": "7f809805612dce769c4ab418be4f72f372201bf696c088628a5b69609d2fd90b",
+      "bytes": 16248
     },
     {
       "path": "agents/first-reader.md",
-      "sha256": "3857ed745d31fb3f9818078216b430c71d4feba75ab20c7cdd97afd5d011cfe4",
-      "bytes": 5016
+      "sha256": "3f21d799d7a14287abfd9ef5d76f4e9531245b62e2d074d1afe14292419c46e9",
+      "bytes": 7221
     },
     {
       "path": "agents/openai.yaml",
@@ -35,18 +35,18 @@
     },
     {
       "path": "references/adaptation.md",
-      "sha256": "eb6a2278b18e0c30b71af8a078f25d51a4a662ed89ed604039646cad84d2b262",
-      "bytes": 2087
+      "sha256": "1edd1cbf7b651f05a6f55aa8053880f810746333db9ff03dba0b89fb85448b65",
+      "bytes": 2824
     },
     {
       "path": "references/formats-and-delivery.md",
-      "sha256": "37dbdddab05cd47491f59d1902be1d6e2f572e481d1a9e670c23d983b2eaa9ef",
-      "bytes": 6803
+      "sha256": "afc89de3d415d154361fc3d816dfccf0d29c51aa90cbfd6653238e16f2bc3391",
+      "bytes": 8071
     },
     {
       "path": "references/materials-and-angle.md",
-      "sha256": "f08f84b929547a3b24014f1ef92065f39e07105b1f0fa6dc5962aabcee3fed97",
-      "bytes": 8330
+      "sha256": "b64a7feff7624509c505f8dd713e416735fb54ecfb56c997bce1c47031cba376",
+      "bytes": 9355
     },
     {
       "path": "references/research-coverage.md",
@@ -65,8 +65,8 @@
     },
     {
       "path": "references/revision/index.md",
-      "sha256": "a8189ac7d88f3c76a99aed2a895de5c88e3008727ac6e9e8907adb56be63c062",
-      "bytes": 12094
+      "sha256": "8eef596e836e680ae0c9a8e53796af21854c9400533c64c13e97a82e9029ba24",
+      "bytes": 14034
     },
     {
       "path": "references/revision/method.md",
@@ -85,8 +85,8 @@
     },
     {
       "path": "references/script-usage.md",
-      "sha256": "a39f757c1f36b831de3a6e61247c1d47b9487c7d3c04547b3002d6bc824e14e4",
-      "bytes": 8603
+      "sha256": "bb08d6d11117b041da8c0adcd56a3d965fce70e2ce8e15f9c695a603004dcb72",
+      "bytes": 10721
     },
     {
       "path": "references/source-map.md",
@@ -130,8 +130,8 @@
     },
     {
       "path": "references/story-cards/27-讲别人怎么做成的.md",
-      "sha256": "914523455709a815adff72fa1f2480eb179aae557dc149f474a78be72edfc6bf",
-      "bytes": 9179
+      "sha256": "ffa94a35e6c7e74ae5e432d7f55d49cf698cabd3083c9729f2fa2645ecebfc9e",
+      "bytes": 9863
     },
     {
       "path": "references/story-cards/28-平凡英雄.md",
@@ -185,13 +185,13 @@
     },
     {
       "path": "references/story-cards/catalog.json",
-      "sha256": "ee2ae830d6bc2c25d068bb72a2932d590d3f1e966b5d76e299b4ec98e2421e44",
-      "bytes": 14686
+      "sha256": "9d48cb0574cad6ce8b60738dbe632b4ddfdd4aef2092bf3e119c07e88c4519c6",
+      "bytes": 14922
     },
     {
       "path": "references/story-cards/index.md",
-      "sha256": "d7c4112e3f03917bb28d0521bdba42e88b6136aa031adf557b22f61653ed0cdd",
-      "bytes": 20081
+      "sha256": "d31f8f1c1f6c2da255d13fa45e1213fad274930bec4f2b737733ff680b36836c",
+      "bytes": 20258
     },
     {
       "path": "references/story-checks.md",
@@ -237,6 +237,11 @@
       "path": "references/structures.md",
       "sha256": "4b0e92cac4d97a810da31951c775481255d06ee08052a130ba89b450f59a9957",
       "bytes": 286
+    },
+    {
+      "path": "references/writing-cards/KB01-做法说到能照做.md",
+      "sha256": "3ac96a1c5d8112806e72bdcf369861e6ed860135c391480a2f1cddf1a78764bf",
+      "bytes": 3118
     },
     {
       "path": "references/writing-cards/LN01-击碎标签.md",
@@ -454,6 +459,11 @@
       "bytes": 3183
     },
     {
+      "path": "scripts/_review_safety.py",
+      "sha256": "f0db5df0e5d46e443801546a020c7bfb9db5a1994571a35746ca5edde08a764e",
+      "bytes": 4097
+    },
+    {
       "path": "scripts/_text.py",
       "sha256": "c9e0120f7e146b46db0a9321461a64b8ae25076150f33ca56516dab478f3cd11",
       "bytes": 1031
@@ -500,13 +510,13 @@
     },
     {
       "path": "scripts/run_first_reader.py",
-      "sha256": "d2926593042ef804100f7548e245a961e8507b3a0a3b22ee50a3271c5bee8a23",
-      "bytes": 24946
+      "sha256": "cd872be8ca6b35d86c38ccb3ba1b7a587c3430c84ffd3a58727c5dbadd0e1d86",
+      "bytes": 29850
     },
     {
       "path": "scripts/run_review_panel.py",
-      "sha256": "d890be36d9aa002f9d6ac828c06ada0594e2ea4d595dc49fb91d0297220df582",
-      "bytes": 20494
+      "sha256": "21215fd00d16dc96e24e2a29162661707573c0cd8832885c63f3dd5f0661f28e",
+      "bytes": 25777
     },
     {
       "path": "templates/material-checklist.md",
@@ -520,13 +530,18 @@
     },
     {
       "path": "templates/story-workbench.md",
-      "sha256": "cc8536827ea3edfef51f429e0ae44c6b43479a19c3a3e363d110e7850aa39baa",
-      "bytes": 5953
+      "sha256": "5047261277e8559c1d362be8f8bc0fbdce4d219e627dccd50bda2383c45bb17d",
+      "bytes": 8360
     },
     {
       "path": "templates/voiceover-delivery.md",
-      "sha256": "f9e3f459132c035dde8fa43ba50c38de7218156b102f59bd6512d02df77e5ec0",
-      "bytes": 2288
+      "sha256": "4954f8a57ad68b15f17d0ffd7000228c139e9c7ea1ff6d078c8e208f0fbf492d",
+      "bytes": 4340
+    },
+    {
+      "path": "tests/test_reliability.py",
+      "sha256": "20af0d7f77400241add7cebeacdb7091596744f30be70be5a56e7ddcf2a1094e",
+      "bytes": 51317
     },
     {
       "path": "tests/test_review_panel.py",
@@ -644,9 +659,37 @@
         "writing_cards": 43,
         "errors": 0
       }
+    },
+    {
+      "synced_at": "2026-10-31T20:59:40+08:00",
+      "note": "补两处知识库写法：27 号故事卡增加“全流程拆解”四段推进和用配角立人；新增写法卡 KB01“做法说到能照做”（知识库正文表达第 10 条）；选卡第二判据改为先看素材类型，再看路由目录的独立来源数与报过数据的来源数，最后才比有无完整案例。",
+      "changed_skill_files": 5,
+      "source_byte_comparison": {
+        "matched": 106,
+        "mismatched": 0
+      },
+      "prior_validation_reused": {
+        "reason": "本次只改卡片内容和选卡一句话，未改脚本；全套检查在本机同一工作区跑过，结果与改前快照的既有失败一致。",
+        "offline_regression": {
+          "passed": 244,
+          "failed": 10,
+          "exit_code": 1
+        },
+        "note": "10 项失败均为改前快照同样存在的既有失败：首读失败文案不同步 6 项、/tmp 路径环境 2 项、受众默认文案不同步 2 项。"
+      },
+      "external_model_calls_for_sync": 0,
+      "full_external_review_chain": "not_tested",
+      "repository_integrity": {
+        "exit_code": 0,
+        "method_entries": 54,
+        "local_links": 255,
+        "story_cards": 18,
+        "writing_cards": 44,
+        "errors": 0
+      }
     }
   ],
-  "last_synced_at": "2026-10-29T18:07:38+08:00",
+  "last_synced_at": "2026-10-31T20:59:40+08:00",
   "initial_import_validation": {
     "skill_integrity": {
       "exit_code": 0,

@@ -8,7 +8,7 @@
 
 从 [SKILL.md](SKILL.md) 开始，按五步处理：盘点素材、匹配卡片、构建写稿提示、审稿与修改、交付。
 
-- [故事卡与写法卡目录](references/story-cards/index.md)：18张故事卡、43张写法卡。
+- [故事卡与写法卡目录](references/story-cards/index.md)：18张故事卡、44张写法卡。
 - [工作表](templates/story-workbench.md)：看点和观众会先问的问题、候选、关键事实原句与限制、每段安排。
 - [改稿流程](references/revision/index.md)：整篇初稿由八位手册审稿员和一位用意审稿员审核；局部修改按影响选组，写稿方统一取舍和修改。
 - [脚本说明](references/script-usage.md)：读卡、估时、引号数字核对、首读和审稿命令。
