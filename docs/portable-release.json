@@ -1,0 +1,488 @@
+{
+  "skill": "story-craft",
+  "date": "2026-10-31",
+  "baseline_commit": "da3b87fccd72a96532c807f6da7b4efa4c07793f",
+  "mode": "bundled-local-default-optional-wiki",
+  "validation": {
+    "format_exit": 0,
+    "offline_commands": [
+      {
+        "command": "python3 -B scripts/check_integrity.py",
+        "exit_code": 0
+      },
+      {
+        "command": "python3 -B scripts/read_methods.py --list-templates",
+        "exit_code": 0
+      },
+      {
+        "command": "python3 -I -B scripts/read_methods.py --stage opening --list",
+        "exit_code": 0
+      }
+    ],
+    "unit_tests_passed": null,
+    "unit_tests_failed": null,
+    "independent_review": "passed",
+    "synthetic_trial": "completed",
+    "trial_summary": "完成一次本地故事写作与核查；外部首读和跨模型审稿未执行，交付明确标注未审范围。",
+    "external_services_executed": false
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "b2cb65f546382c5ab78c5a60c0672186e909d0795beef91c9e82de4cc538b3d8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8d7bc8a565774a73b9a9af11ac9cafe6715ffaeb82db9a080fdad301c4c9caf9"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c523460a469efd5dc27c7cec13566d08b151543f21de7a11755a0639b08f13c8"
+    },
+    {
+      "path": "agents/first-reader.md",
+      "sha256": "3f21d799d7a14287abfd9ef5d76f4e9531245b62e2d074d1afe14292419c46e9"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "8eb1b3ef035344a26ac90303689dd8c8c6d019c7f6b754bcc4d011e495e772e1"
+    },
+    {
+      "path": "docs/maintenance-evaluation.md",
+      "sha256": "21ce582bba274ec242590007a19f4e26a0abd45777c244b556aefce81ac927fd"
+    },
+    {
+      "path": "docs/portability-validation.md",
+      "sha256": "e5f0cb7eff57b429220fcb23914240b0096dec650bf6e23826c5dc42cacc4b37"
+    },
+    {
+      "path": "docs/repository-import.json",
+      "sha256": "e9d09ffb1cfb5d78c37e6bc4413d2b21f54cba8ccacbb837a8e24832f00abaa9"
+    },
+    {
+      "path": "docs/upload-snapshot.json",
+      "sha256": "fbe7e4fceba820dacd929db4dfec12c64905d249a902faeaa3a1705a5a5acce2"
+    },
+    {
+      "path": "examples/first-run-result.md",
+      "sha256": "359e77fb50df349d63c29163acef98d4e6122d0cd59117b9d9b811e8137ef7a3"
+    },
+    {
+      "path": "examples/first-run.md",
+      "sha256": "7c166d37ca900941178f6a41b8319466d44bde4cdfeff675ea9a9b3a9585d8b8"
+    },
+    {
+      "path": "references/adaptation.md",
+      "sha256": "1edd1cbf7b651f05a6f55aa8053880f810746333db9ff03dba0b89fb85448b65"
+    },
+    {
+      "path": "references/formats-and-delivery.md",
+      "sha256": "afc89de3d415d154361fc3d816dfccf0d29c51aa90cbfd6653238e16f2bc3391"
+    },
+    {
+      "path": "references/materials-and-angle.md",
+      "sha256": "62672ca3f81687a55fc6e92d1f13beed181e2789e111283e13c72378a7cb97f4"
+    },
+    {
+      "path": "references/research-coverage.md",
+      "sha256": "4fb776ed078f561a4595cb9fb4b3d7ceda0ec182b975b25d24ad3cef7738fe34"
+    },
+    {
+      "path": "references/revision/body.md",
+      "sha256": "077c7396fcd611b39fd23981dcb4ff6de906c985a3d4b17a2ba60d0bffa7212e"
+    },
+    {
+      "path": "references/revision/cases.md",
+      "sha256": "64766f2d4d61f2b65ee94c7fddcd8f434b858a5b6bb2532d1a4d822414f2a93a"
+    },
+    {
+      "path": "references/revision/index.md",
+      "sha256": "8eef596e836e680ae0c9a8e53796af21854c9400533c64c13e97a82e9029ba24"
+    },
+    {
+      "path": "references/revision/method.md",
+      "sha256": "ec422da262f88761e330bd9b85da644c174332407a5de43ea1fcade4c50b755f"
+    },
+    {
+      "path": "references/revision/structure.md",
+      "sha256": "ccf490f8a98a8bb2d487a3336b9df58086f24ba0238bdb5b8e4386bdf631615b"
+    },
+    {
+      "path": "references/revision/titles.md",
+      "sha256": "ea3985687527e51c6cc0d0232d8a83246f53c94ee35d64e03537f8e04131afd3"
+    },
+    {
+      "path": "references/script-usage.md",
+      "sha256": "bb08d6d11117b041da8c0adcd56a3d965fce70e2ce8e15f9c695a603004dcb72"
+    },
+    {
+      "path": "references/source-map.md",
+      "sha256": "303b30ec9cc2222de3b2ee97b9d783c0b0285c843515312733b3db7c6239a90b"
+    },
+    {
+      "path": "references/story-cards/09-拿自己做成的案例拆方法.md",
+      "sha256": "7ebdcb2faabf9c2a518f58a43a819ac21782dcb6a080130ecbd91f177458b6b6"
+    },
+    {
+      "path": "references/story-cards/10-拆别人的生意怎么赚钱.md",
+      "sha256": "f193409773b986c7a24a7c5e223b9d8e67089cdb68893fd781601f6266e93dea"
+    },
+    {
+      "path": "references/story-cards/17-检讨共鸣.md",
+      "sha256": "b46ce8e849ad34f2e64d5d259d2e7da06226fddad88ec36ad5fe4d243c9e04e9"
+    },
+    {
+      "path": "references/story-cards/18-回应偏见.md",
+      "sha256": "bbdaf03a73b9ad3a6c0221c282be82a27c519638e275349267238577be3f6347"
+    },
+    {
+      "path": "references/story-cards/20-从一件事看懂一个现象.md",
+      "sha256": "78a6f0ba4cc482a43f567f885b616db423d3c33065c2ce4db957d764dea8e389"
+    },
+    {
+      "path": "references/story-cards/23-困境转机.md",
+      "sha256": "f62bd2c2f74e5ebc7a1fe21cf0d0faa3d78fde4ac77b06b847e08fbf95dedfa2"
+    },
+    {
+      "path": "references/story-cards/26-我帮别人成了事.md",
+      "sha256": "df5289c58ec576bca1b246467608412a911e11253cc8cf6741a351e0c0e36ccb"
+    },
+    {
+      "path": "references/story-cards/27-讲别人怎么做成的.md",
+      "sha256": "ffa94a35e6c7e74ae5e432d7f55d49cf698cabd3083c9729f2fa2645ecebfc9e"
+    },
+    {
+      "path": "references/story-cards/28-平凡英雄.md",
+      "sha256": "4a03304c8d07ec3f6bf4ec941254af2319b40a98f93ff72fa12bd584cd8cd621"
+    },
+    {
+      "path": "references/story-cards/29-苦难经历.md",
+      "sha256": "543bdc2fccbe6b56c27a8fdbb1998967911b8a85a4d41654f3961a60f6e6ddc4"
+    },
+    {
+      "path": "references/story-cards/30-折腾经历.md",
+      "sha256": "0a9cb623859047615f5c9446533064af182ba1a816f5e3ffd1f98eeb0d093fbf"
+    },
+    {
+      "path": "references/story-cards/31-帮助弱者.md",
+      "sha256": "0aae9b36970f90df5c72d8ea4b3fe172baadb9afd34ffa37014d67b812cd360e"
+    },
+    {
+      "path": "references/story-cards/32-后知后觉的爱.md",
+      "sha256": "b04133613c22c5ebb23ec5fb1d1627a7b81e380bd89db75d7a0b116211f49a5d"
+    },
+    {
+      "path": "references/story-cards/33-关系里的一件小事.md",
+      "sha256": "a64986a0c9b966a7039514e3ba2d01b6f658bcd9009da6b90091ea7aee28f877"
+    },
+    {
+      "path": "references/story-cards/34-人生选择.md",
+      "sha256": "879c23405c085648d017511d35b02739f17e372ddfb93c37faca4efbf48e2585"
+    },
+    {
+      "path": "references/story-cards/35-过程记录.md",
+      "sha256": "e094b2ff5c9a7e83b730b2ab883fda4c9c00f2eb8e21d915dacf7e4576d4d26a"
+    },
+    {
+      "path": "references/story-cards/40-替你去体验.md",
+      "sha256": "40bd54bf77e493e826b4b1942651871685d739c0279df2a1a1a7652ebf5f782a"
+    },
+    {
+      "path": "references/story-cards/49-热点加我的经历.md",
+      "sha256": "50d4dc7536376e3dff0348bf61cd77fd3be7a25db7a9b258e57b8d69c4ba0e95"
+    },
+    {
+      "path": "references/story-cards/catalog.json",
+      "sha256": "9d48cb0574cad6ce8b60738dbe632b4ddfdd4aef2092bf3e119c07e88c4519c6"
+    },
+    {
+      "path": "references/story-cards/index.md",
+      "sha256": "d31f8f1c1f6c2da255d13fa45e1213fad274930bec4f2b737733ff680b36836c"
+    },
+    {
+      "path": "references/story-checks.md",
+      "sha256": "723a3c6ff5b1d16824c88f0f8cba62fd263288c4c285fc4b82a16c91c23c1314"
+    },
+    {
+      "path": "references/story-methods/00-storytelling.md",
+      "sha256": "bf7cbeec7057c78ce5b8bda88192d93d40910bed43ba5a723a38056b809ccdc6"
+    },
+    {
+      "path": "references/story-methods/01-structure.md",
+      "sha256": "5c282d8ca957f9e5b1b60909b7a84724cb783755f5f31ee581ea7024adc46e41"
+    },
+    {
+      "path": "references/story-methods/02-opening.md",
+      "sha256": "380ac79aecd39cfc1d4900d4be4f899df1b948e49529aaf9287cf38a5603fdbd"
+    },
+    {
+      "path": "references/story-methods/03-body.md",
+      "sha256": "480d17580a3bd82bbdb2d299ee05ea99b915ddc040651e6a22e37da35a88385f"
+    },
+    {
+      "path": "references/story-methods/04-ending.md",
+      "sha256": "6d570f68e036ca5b034df79390414e902ecd8bae3abd62e5f4a10c26f856aeef"
+    },
+    {
+      "path": "references/story-methods/index.md",
+      "sha256": "a2c17d4692a7de3b30dbb2cfc7efd4e86b5b339f8f8d4f14f00c853d13479cbe"
+    },
+    {
+      "path": "references/story-methods/provenance.json",
+      "sha256": "3609ddb8ff28cc32389aa15b8fc16764f8d02f8b0e6d39acd650b833f7ecd968"
+    },
+    {
+      "path": "references/structures.md",
+      "sha256": "4b0e92cac4d97a810da31951c775481255d06ee08052a130ba89b450f59a9957"
+    },
+    {
+      "path": "references/writing-cards/KB01-做法说到能照做.md",
+      "sha256": "3ac96a1c5d8112806e72bdcf369861e6ed860135c391480a2f1cddf1a78764bf"
+    },
+    {
+      "path": "references/writing-cards/LN01-击碎标签.md",
+      "sha256": "42bed1b93b5a612d842e3edda4916e6ae0860eee20b79c4c0836bf850a6bde27"
+    },
+    {
+      "path": "references/writing-cards/LN02-生活被打断.md",
+      "sha256": "911042307027c6594241018629dcddf2f490943776d33176bb923018a1826ac0"
+    },
+    {
+      "path": "references/writing-cards/LN03-先摆常识.md",
+      "sha256": "0ae4f936ccc68188a061f27e9aa8493e3d04b67b040c3dd4dc93958fe8bf99c0"
+    },
+    {
+      "path": "references/writing-cards/LN04-意外优先.md",
+      "sha256": "669823803cb1a0fa1f478186da7d9c2ce6ff9ed498b7f2626554ece232e01eaf"
+    },
+    {
+      "path": "references/writing-cards/LN05-喜好入口.md",
+      "sha256": "d2e464b91a8327a7e9375688dee39ef4f91302b6502b2c97867d37d0b12d5e9f"
+    },
+    {
+      "path": "references/writing-cards/LN06-困境层层展开.md",
+      "sha256": "b37fc15c4ee76d3a7b63e8c0b65fbcf0ab6aaa5f7edebabb75f97740d3272208"
+    },
+    {
+      "path": "references/writing-cards/LN07-情绪小转折.md",
+      "sha256": "c98f171888c79df6b925b1f1ad45f27b8bb209e855a07d3835c5c54bdc3822a5"
+    },
+    {
+      "path": "references/writing-cards/LN08-目标转向.md",
+      "sha256": "81706468fd689f83defdae8570dafbfaf3f43b6b984c4f073fe27a4ca790d1b2"
+    },
+    {
+      "path": "references/writing-cards/LN09-大问题落到一个人.md",
+      "sha256": "48851e58c5d8461cd86d4e99c12207a9b2c6b793edf2020d1408bf700f0d415a"
+    },
+    {
+      "path": "references/writing-cards/LN10-小事连到大系统.md",
+      "sha256": "335fe9f7a6bd86185875bd7b122d1fd4431f44c6e689727eb8538d6ad95dbd29"
+    },
+    {
+      "path": "references/writing-cards/LN11-金手指反复验证.md",
+      "sha256": "afb7eedd442d964f407c6644db5a3f9fa4656286da290699c5a6bb58438286e1"
+    },
+    {
+      "path": "references/writing-cards/LN14-身份瞬间拉近.md",
+      "sha256": "d8fb8ebd95d2062391fd8ff031d95ca5867b9224dc3d64fc0a4ddab2f1139add"
+    },
+    {
+      "path": "references/writing-cards/LN15-最后揭晓关系.md",
+      "sha256": "cf3fede53b9a39304559c0bdf8e3226fd8dcfa4c243481497dc73930de6ebc5e"
+    },
+    {
+      "path": "references/writing-cards/LN16-共同体.md",
+      "sha256": "47ca370907198853cbbdf6d24511782922f85d6a63e3fe00494e01f5a272f854"
+    },
+    {
+      "path": "references/writing-cards/LN17-缺憾到改善.md",
+      "sha256": "bf9a2b790401423f91fd12095900681335851fa4584dee495a722c72fb09db89"
+    },
+    {
+      "path": "references/writing-cards/LN23-探照灯.md",
+      "sha256": "0c84ce426165192e9eb9d226490911c838886aeb5617d85da071b89d13741b08"
+    },
+    {
+      "path": "references/writing-cards/LN24-全景与特写.md",
+      "sha256": "49d6733beaf3039b56f0d90cbbc8decc7ac32be04eb00a6af26e9692249858a8"
+    },
+    {
+      "path": "references/writing-cards/LN25-相似画面组接.md",
+      "sha256": "f78af8b885bf24e6ab69707772280f162e46dc245829ad70349b307cf6169f20"
+    },
+    {
+      "path": "references/writing-cards/LX01-反常任务.md",
+      "sha256": "86a7a84990e11b19b5687df09013afeb68d997e39c22acfc41c2cac6cf1309f2"
+    },
+    {
+      "path": "references/writing-cards/LX02-特长破局.md",
+      "sha256": "34859da4bf760d5b658254f5be21d6d4f05f69bdcb7cf6aa5e77311dda12a950"
+    },
+    {
+      "path": "references/writing-cards/LX03-人物混搭.md",
+      "sha256": "4400ff1c004188d47bdc266f80e0ddde5013f0d3ad52547ec579aa0e9dd95c18"
+    },
+    {
+      "path": "references/writing-cards/LX04-让关系照出人物.md",
+      "sha256": "653ba3118650b42522c2d9f3b5da4d45ab0acdb4be6d56e47619c1041d4c25b3"
+    },
+    {
+      "path": "references/writing-cards/LX05-三幕式.md",
+      "sha256": "1b9fcfa70ef6a52716f671fdf26eacd77f86fe63ed0a9d5763e0733d9cb9a69f"
+    },
+    {
+      "path": "references/writing-cards/LX06-因果接力.md",
+      "sha256": "379d76ee9e2fc6eef22380538159c8be4a32bfece8d0e5b737f7ff5268d4bed9"
+    },
+    {
+      "path": "references/writing-cards/LX07-性格推动选择.md",
+      "sha256": "b9c934791c02c3d4ba016335b5f0cf097848fa705d68f66694bd5625b852ade5"
+    },
+    {
+      "path": "references/writing-cards/LX08-异路破局.md",
+      "sha256": "e2e214198defe352285f4a5414308a03ecf1778877fe96041f42822756ff407c"
+    },
+    {
+      "path": "references/writing-cards/LX09-关系反转.md",
+      "sha256": "260b39e0b3b68fdc0943512a893612c26512e3790f8e5491e27088110822ee02"
+    },
+    {
+      "path": "references/writing-cards/LX10-前提翻转.md",
+      "sha256": "64829b70f3d8573a5a5da2703d06301855023522d369de87bf232062e0622c74"
+    },
+    {
+      "path": "references/writing-cards/LX11-让人关心处境.md",
+      "sha256": "94f4792f5491c86ee2405f39916a9252a7587ff735ccdb307a1f99d3a90f481f"
+    },
+    {
+      "path": "references/writing-cards/LX12-高一厘米.md",
+      "sha256": "ecf17ce5229bf64e2333c1c82b1227a2b68d45bc17b9f574b482f46920c301b6"
+    },
+    {
+      "path": "references/writing-cards/LX13-一个目标，多面受阻.md",
+      "sha256": "e43c2c509e49b0de3b7fe60b91543a19577efb0651ba1af9dce44cdac5947717"
+    },
+    {
+      "path": "references/writing-cards/LX14-多回合变招.md",
+      "sha256": "b962cfe3ac498f92c6a3d7362b43aa0fa40846008b20df46ccba8f0396778441"
+    },
+    {
+      "path": "references/writing-cards/LX15-行动带情绪，事情过后留一拍.md",
+      "sha256": "4812a23023b568e85c3872956c6df9c30b21d3cf43e35eb3d3529f102efe0b33"
+    },
+    {
+      "path": "references/writing-cards/LX16-话只说一半.md",
+      "sha256": "04afae338f911fc08be50c2e58abd0e7d4f196b5957707e44dce63c4e028e38b"
+    },
+    {
+      "path": "references/writing-cards/LX17-借一件东西说心事.md",
+      "sha256": "1317ae34020b56b3db5f53506e8ec39ee0567dc5f9993abbdff24e5596686f27"
+    },
+    {
+      "path": "references/writing-cards/LX18-夹带信息.md",
+      "sha256": "b2fcaf417cc22197d8da4cc62f0cb2a091cb474a201125a67669c5210790f6f9"
+    },
+    {
+      "path": "references/writing-cards/LX19-对话显关系.md",
+      "sha256": "b2545aad5f43aa719895cdce032511f967ecfdd9ec7ad0aab2408c642c3d1609"
+    },
+    {
+      "path": "references/writing-cards/LX20-类比金句.md",
+      "sha256": "5adfeaeb0b2d0db9149a08e5b091c6d365017fd68e60354c1e739a5da0324da5"
+    },
+    {
+      "path": "references/writing-cards/LX21-问题接力.md",
+      "sha256": "27f290da0c38bbd01c885f262ced3af24805bd8e15752fb6786757c266859e8b"
+    },
+    {
+      "path": "references/writing-cards/LX22-悬崖切点.md",
+      "sha256": "cc441996aa100438d233e9ca4424453cf0b598221b8ec44a746b4d6615f9ab90"
+    },
+    {
+      "path": "references/writing-cards/LX23-拼图揭谜.md",
+      "sha256": "eeccbeb6148249e1e0978f0f69d3dd84f3e3ca1ff2bdcbe6d010f54f17364d44"
+    },
+    {
+      "path": "references/writing-cards/LX24-两难见人.md",
+      "sha256": "14610cec05c24d2f0f1e5c0d9554f6079bfef843a76e64fa0a139316a756f36a"
+    },
+    {
+      "path": "references/writing-cards/LX25-不完美的人.md",
+      "sha256": "5c908227d28adfced0fdb0681a921fe227173bc6949183610610ab56a81a3d12"
+    },
+    {
+      "path": "scripts/_review_safety.py",
+      "sha256": "f0db5df0e5d46e443801546a020c7bfb9db5a1994571a35746ca5edde08a764e"
+    },
+    {
+      "path": "scripts/_text.py",
+      "sha256": "c9e0120f7e146b46db0a9321461a64b8ae25076150f33ca56516dab478f3cd11"
+    },
+    {
+      "path": "scripts/audit_draft.py",
+      "sha256": "80e9eacbaf26eabad6292d292db8b54e6315622af8bb245e6b74391fe7703f9d"
+    },
+    {
+      "path": "scripts/check_integrity.py",
+      "sha256": "24fe38fe5dd0ee7f634c455c900ca86cfa157026bc9e01d70ebe20b82e50a068"
+    },
+    {
+      "path": "scripts/check_quotes_numbers.py",
+      "sha256": "4ed29fe876c0bddcf319100174726455a1a5e66d7017659fe78aa1a4c3ff8e03"
+    },
+    {
+      "path": "scripts/check_templates.py",
+      "sha256": "1a5401477b4f659f7bcd49adafa50c0c4b1e4a9a23f686ce4e24a3e50efad917"
+    },
+    {
+      "path": "scripts/length_and_lint.py",
+      "sha256": "3de94c41d646cf3fd2b1a230110a9fb38496cb40d9c17e65d2200c8b64674397"
+    },
+    {
+      "path": "scripts/mark_source_sentences.py",
+      "sha256": "34e141562699f168abd46fec5fc7ed49317ed640fc87f791c14768e46b16e7ea"
+    },
+    {
+      "path": "scripts/pacing_review.py",
+      "sha256": "8f610e6b4e768409863117f5581da567bdbf7c380c4dc065243478353f7c80a0"
+    },
+    {
+      "path": "scripts/read_methods.py",
+      "sha256": "6c5f8178a15f64deef520911ebff7c27f18c1600d1484c273ae6fd8178750c92"
+    },
+    {
+      "path": "scripts/run_first_reader.py",
+      "sha256": "cd872be8ca6b35d86c38ccb3ba1b7a587c3430c84ffd3a58727c5dbadd0e1d86"
+    },
+    {
+      "path": "scripts/run_review_panel.py",
+      "sha256": "21215fd00d16dc96e24e2a29162661707573c0cd8832885c63f3dd5f0661f28e"
+    },
+    {
+      "path": "templates/material-checklist.md",
+      "sha256": "207460e355e64856e8b875e81f4218d382219fb3df89357fbfd611cdc54f2e9b"
+    },
+    {
+      "path": "templates/person-card.md",
+      "sha256": "43eea10c78f55d89f20a6cb1e7758438f82f4367e94a61ba082afa8e3e570121"
+    },
+    {
+      "path": "templates/story-workbench.md",
+      "sha256": "5047261277e8559c1d362be8f8bc0fbdce4d219e627dccd50bda2383c45bb17d"
+    },
+    {
+      "path": "templates/voiceover-delivery.md",
+      "sha256": "4954f8a57ad68b15f17d0ffd7000228c139e9c7ea1ff6d078c8e208f0fbf492d"
+    },
+    {
+      "path": "tests/test_reliability.py",
+      "sha256": "20af0d7f77400241add7cebeacdb7091596744f30be70be5a56e7ddcf2a1094e"
+    },
+    {
+      "path": "tests/test_review_panel.py",
+      "sha256": "171c5e0290f6267e5a0a0ebdc6522021ba2caaefb3154bf33296e9fb618f0ea6"
+    }
+  ],
+  "manifest_scope": "All distributed files except this manifest; Git commit identifies the complete version."
+}
