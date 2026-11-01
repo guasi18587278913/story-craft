@@ -9,6 +9,7 @@ import argparse
 import concurrent.futures as cf
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -181,6 +182,18 @@ def command(engine, task_dir, out_file, effort, model):
             "--tools", "", "--model", model or "opus"], True
 
 
+def command_model(engine, cmd):
+    """只记录实际命令中的模型标识，不另读配置，也不把别名当成后端版本。"""
+    for flag, value in zip(cmd, cmd[1:]):
+        if engine == "claude" and flag == "--model":
+            return value
+        if engine == "codex" and flag == "-c":
+            match = re.fullmatch(r'model="([^"]+)"', value)
+            if match:
+                return match.group(1)
+    return None
+
+
 def execution_evidence(stage="not_started", artifact=None, nonempty=False, status="failed"):
     return {"call_stage": stage, "external_requests": "not_observed",
             "nonempty_feedback_received": nonempty,
@@ -197,10 +210,12 @@ def run_one(engine, task_dir, name, prompt, out_file, timeout, effort, model):
         return {"group": name, "status": "failed", "error": "output_exists",
                 "message": "输出已存在，拒绝复用旧审稿；请发起新一轮。", "output": None,
                 "execution": execution_evidence()}
-    result = {"group": name, "status": "failed", "output": None}
+    result = {"group": name, "status": "failed", "output": None,
+              "requested_model": None, "returned_model": None}
     stdout_is_answer = False
     try:
         cmd, stdout_is_answer = command(engine, task_dir, out_file, effort, model)
+        result["requested_model"] = command_model(engine, cmd)
         stage = "attempted"
         r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=timeout, cwd=str(task_dir))
         stage = "exited"
@@ -237,6 +252,54 @@ def run_one(engine, task_dir, name, prompt, out_file, timeout, effort, model):
 
 def fingerprint(text):
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def skill_revision():
+    """给本地运行文件做内容指纹；留证不可用时记未知，不阻断审稿。"""
+    paths = [ROOT / "SKILL.md"]
+    unavailable = []
+
+    def walk_error(error):
+        path = Path(error.filename) if error.filename else ROOT
+        unavailable.append(path.relative_to(ROOT).as_posix() + "/")
+
+    for name in ("agents", "references", "scripts", "templates"):
+        directory = ROOT / name
+        if directory.is_symlink() or not directory.is_dir():
+            unavailable.append(name + "/")
+            continue
+        try:
+            for current, directories, files in os.walk(directory, onerror=walk_error, followlinks=False):
+                for child in list(directories):
+                    path = Path(current) / child
+                    if child == "__pycache__":
+                        directories.remove(child)
+                    elif path.is_symlink():
+                        unavailable.append(path.relative_to(ROOT).as_posix())
+                        directories.remove(child)
+                for filename in files:
+                    path = Path(current) / filename
+                    if path.is_symlink():
+                        unavailable.append(path.relative_to(ROOT).as_posix())
+                    elif path.suffix in (".md", ".py", ".json", ".yaml", ".yml"):
+                        if path.is_file():
+                            paths.append(path)
+                        else:
+                            unavailable.append(path.relative_to(ROOT).as_posix())
+        except OSError:
+            unavailable.append(name + "/")
+    hashes = {}
+    for path in sorted(paths):
+        relative = path.relative_to(ROOT).as_posix()
+        try:
+            if path.is_symlink():
+                raise OSError("不读取软链目标")
+            hashes[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
+        except OSError:
+            unavailable.append(relative)
+    return {"sha256": None if unavailable else fingerprint(json.dumps(hashes, sort_keys=True)),
+            "file_count": len(hashes), "unavailable": sorted(set(unavailable)),
+            "scope": "SKILL.md + agents/references/scripts/templates (.md/.py/.json/.yaml/.yml)"}
 
 
 def save_summary(path, summary):
@@ -339,6 +402,7 @@ def main():
             read_required(REV / manual, "审稿手册 " + manual)
         prepared = [(table[k][0], build_prompt(table[k], draft, context["audience"]["value"],
                      context["medium"]["value"], a.focus or "", source_text, k == "9", a.scope, changes)) for k in wanted]
+        revision = skill_revision()
     except (OSError, ValueError, RuntimeError) as exc:
         p.error("预检失败：" + (str(exc) if isinstance(exc, ValueError) and not isinstance(exc, UnicodeError)
                                else "目录或手册不可访问，或文本不是 UTF-8。"))
@@ -366,6 +430,7 @@ def main():
         summary = {"draft": str(draft_path), "draft_sha256": input_hashes["draft"],
                    "input_sha256": input_hashes, "run_id": review_dir.name,
                    "scope": a.scope, "review_dir": str(review_dir), "engine": a.engine,
+                   "model_argument": a.model, "skill_revision": revision,
                    "effort": a.effort if a.engine == "codex" else None,
                    "prompts_only": a.prompts_only, "groups": [j[0] for j in jobs],
                    "task_context": context,

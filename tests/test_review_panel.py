@@ -168,6 +168,101 @@ class ReviewPanelTests(unittest.TestCase):
         self.assertEqual(len(summary["groups"]), 9)
         self.assertIn("10-用意", summary["groups"])
 
+    def test_requested_model_matches_launched_command_without_claiming_backend_version(self):
+        cases = [("claude", None, None, "opus"), ("claude", "chosen-model", None, "chosen-model"),
+                 ("codex", "chosen-model", None, "chosen-model"),
+                 ("codex", None, "configured-model", "configured-model"), ("codex", None, None, None)]
+        for n, (engine, argument, configured, expected) in enumerate(cases):
+            with self.subTest(engine=engine, argument=argument, configured=configured):
+                output = self.task / ("model-%s.md" % n)
+
+                def respond(cmd, **kwargs):
+                    if engine == "codex":
+                        output.write_text("本轮意见", encoding="utf-8")
+                    return subprocess.CompletedProcess(cmd, 0, "本轮意见", "")
+
+                with patch.object(panel.shutil, "which", return_value="/mock/cli"), \
+                        patch.object(panel, "codex_model", return_value=configured) as config, \
+                        patch.object(panel.subprocess, "run", side_effect=respond) as run:
+                    result = panel.run_one(engine, self.task, "test", "prompt", output, 1, "xhigh", argument)
+                self.assertEqual(result["status"], "ok")
+                self.assertEqual(result["requested_model"], expected)
+                self.assertIsNone(result["returned_model"])
+                if expected:
+                    self.assertIn(expected if engine == "claude" else 'model="%s"' % expected,
+                                  run.call_args.args[0])
+                if engine == "claude" or argument:
+                    config.assert_not_called()
+                else:
+                    config.assert_called_once_with()
+
+    def test_model_metadata_survives_process_failure(self):
+        with patch.object(panel.shutil, "which", return_value="/mock/cli"), patch.object(
+                panel.subprocess, "run", side_effect=subprocess.TimeoutExpired("mock", 1)):
+            result = panel.run_one("claude", self.task, "test", "prompt", self.task / "timeout.md",
+                                   1, "xhigh", "chosen-model")
+        self.assertEqual(result["status"], "timeout")
+        self.assertEqual(result["requested_model"], "chosen-model")
+        self.assertIsNone(result["returned_model"])
+
+    def test_prompts_only_records_revision_without_resolving_models_or_launching_cli(self):
+        with patch.object(panel, "codex_model", side_effect=AssertionError("no config")), \
+                patch.object(panel.shutil, "which", side_effect=AssertionError("no CLI discovery")), \
+                patch.object(panel.subprocess, "run", side_effect=AssertionError("no process")):
+            code, summary = self.invoke("--prompts-only", "--engine", "codex", "--groups", "10", "--model", "chosen-model")
+        self.assertEqual(code, 0)
+        self.assertEqual(summary["model_argument"], "chosen-model")
+        self.assertEqual(len(summary["skill_revision"]["sha256"]), 64)
+        self.assertEqual(summary["skill_revision"]["unavailable"], [])
+        self.assertEqual(json.loads((Path(summary["review_dir"]) / "summary.json").read_text()), summary)
+
+    def test_skill_revision_tracks_runtime_content_and_ignores_maintenance_and_task_files(self):
+        root = self.task / "skill"
+        for directory in ("agents", "references", "scripts", "templates", "docs", "tests", "tasks"):
+            (root / directory).mkdir(parents=True)
+        (root / "SKILL.md").write_text("Initial workflow", encoding="utf-8")
+        (root / "references/card.md").write_text("Initial card", encoding="utf-8")
+        with patch.object(panel, "ROOT", root):
+            before = panel.skill_revision()
+            for path in ("README.md", "docs/note.md", "tests/test.py", "tasks/source.md"):
+                (root / path).write_text("Not runtime content", encoding="utf-8")
+            self.assertEqual(before, panel.skill_revision())
+            (root / "SKILL.md").write_text("Changed workflow", encoding="utf-8")
+            workflow = panel.skill_revision()
+            self.assertNotEqual(before["sha256"], workflow["sha256"])
+            (root / "references/card.md").write_text("Changed card", encoding="utf-8")
+            self.assertNotEqual(workflow["sha256"], panel.skill_revision()["sha256"])
+
+    def test_unavailable_revision_metadata_does_not_block_review_preparation(self):
+        original = Path.read_bytes
+
+        def fail_metadata(path):
+            if path == panel.ROOT / "SKILL.md":
+                raise PermissionError("synthetic fingerprint read failure")
+            return original(path)
+
+        with patch.object(Path, "read_bytes", fail_metadata):
+            code, summary = self.invoke("--prompts-only", "--groups", "10")
+        self.assertEqual(code, 0)
+        self.assertEqual(summary["status"], "prompts_only")
+        self.assertIsNone(summary["skill_revision"]["sha256"])
+        self.assertIn("SKILL.md", summary["skill_revision"]["unavailable"])
+
+    def test_unreadable_runtime_directory_marks_revision_unknown_without_blocking(self):
+        original = panel.os.scandir
+        denied = panel.ROOT / "references/story-cards"
+
+        def fail_directory(path):
+            if Path(path) == denied:
+                raise PermissionError(13, "synthetic traversal denied", str(path))
+            return original(path)
+
+        with patch.object(panel.os, "scandir", fail_directory):
+            code, summary = self.invoke("--prompts-only", "--groups", "10")
+        self.assertEqual(code, 0)
+        self.assertIsNone(summary["skill_revision"]["sha256"])
+        self.assertIn("references/story-cards/", summary["skill_revision"]["unavailable"])
+
 
 if __name__ == "__main__":
     unittest.main()
