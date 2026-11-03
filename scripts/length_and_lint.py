@@ -19,6 +19,13 @@ def lint(text,rate=288,long_sentence=60,known=()):
     for kind,pattern in [('括号补充',r'（[^）\n]*）|\([^\)\n]*\)'),('破折号',r'—+|–+|--+'),
                          ('不是而是对仗',r'(?<!是)不是[^，,。！？；;\n]{1,100}?(?:[，,]\s*(?:而是|是)|而是)')]:
         for m in re.finditer(pattern,text):add(kind,m)
+    # 跨句的先否后立：不是A，也不是B。是C / 不是A。是B
+    for m in re.finditer(r'不是[^。！？\n]{1,40}?(?:[，,]\s*也不是[^。！？\n]{1,40}?)?[。！？]\s*(?:而是|是)',text):add('不是而是对仗',m)
+    tail_sents=sentences(text)[-3:]
+    for s in tail_sents:
+        st=s['text']
+        if re.search(r'不是.{0,40}?(?:而是|，是|,是|也不是)|有些.{1,20}有些|才是[^，。]{0,12}[。！]?$',st):
+            issues.append({'kind':'结尾模板句','text':st,'line':s['line']})
     seen=set()
     for m in re.finditer(r'(?<![A-Za-z0-9_])[A-Za-z][A-Za-z0-9_+.-]*',text):
         term=m.group().rstrip('.')

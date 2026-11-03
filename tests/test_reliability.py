@@ -902,3 +902,15 @@ if __name__ == "__main__":
         suite = unittest.defaultTestLoader.discover(str(Path(__file__).parent))
         result = unittest.TextTestRunner(verbosity=2).run(suite)
         raise SystemExit(not result.wasSuccessful())
+
+
+class EndingTemplateLintTests(unittest.TestCase):
+    def test_cross_sentence_and_ending_template_flagged(self):
+        import importlib.util, pathlib
+        spec = importlib.util.spec_from_file_location('lal', pathlib.Path(__file__).resolve().parents[1] / 'scripts' / 'length_and_lint.py')
+        mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+        kinds = [i['kind'] for i in mod.lint('他走了。\n活下来靠的不是运气，也不是谁救了他。是那几句话。\n')['issues']]
+        self.assertIn('结尾模板句', kinds)
+        self.assertIn('不是而是对仗', kinds)
+        clean = [i['kind'] for i in mod.lint('他走了。\n那天晚上，他哭了一夜。\n')['issues']]
+        self.assertNotIn('结尾模板句', clean)

@@ -14,6 +14,8 @@
 - [脚本说明](references/script-usage.md)：读卡、估时、引号数字核对、首读和审稿命令。
 - [外部首读说明](agents/first-reader.md)：实际送审范围、时机、预算和版本记录。
 
+2026-11-03 更新：新增[历史人物路径](references/history-people.md)（事实表＋两方冲突表）、[开头角度](references/opening-angles.md)（多版开头须换角度）、[结尾禁令](references/story-checks.md#结尾禁令)及脚本检查、可选的快速模式。详见 [CHANGELOG](CHANGELOG.md)。部分思路参考 [story-studio](https://github.com/konlu/story-studio)（MIT），未复制其语料。
+
 包含近期改进：影响理解关系的改动后复核；关键事实原句进入写稿提示；审稿意见区分“必须修、待核原文、可选增强”。
 
 2026-10-30 维护更新：已采用可靠性／流程契约修补与三处文档归并；“成稿稳定更自然、更值得听”的质量目标仍未证明达成。完整结论、未解决事项与历史验证范围见[内容评估与维护记录](docs/maintenance-evaluation.md)，仅供维护时查阅，不加入每次起草的必读路线。
